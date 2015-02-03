@@ -1,0 +1,16 @@
+<resources>
+    <string name="title_activity_login">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_user">Usuario</string>
+    <string name="prompt_password">Contraseña (optional)</string>
+    <string name="action_sign_in">Ingresar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_cancel2">Cancelando...</string>
+
+    <string name="error_invalid_user">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_incorrect_user_pass">Usuario o contraseña incorrecta</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+</resources>

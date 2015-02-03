@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.jegerima.SIDWeb.PersonalTask">
+    <item android:id="@+id/cancelar_apunte" android:title="@string/boton_cancelar"
+        android:orderInCategory="200" app:showAsAction="always" />
+
+
+    <item android:id="@+id/guardar_apunte" android:title="@string/boton_guardar"
+        android:orderInCategory="100" app:showAsAction="always" />
+
+
+
+
+</menu>

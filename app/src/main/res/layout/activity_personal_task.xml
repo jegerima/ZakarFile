@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/scrollView1"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context="com.example.jegerima.SIDWeb.PersonalTask"
+        tools:ignore="MergeRootFrame" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:layout_gravity="center">
+
+            <LinearLayout android:id="@+id/nuevo_apunte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_horizontal_margin"
+                    android:paddingRight="@dimen/login_horizontal_margin"
+                    android:text="@string/label_titulo"/>
+
+                <EditText android:id="@+id/titulo_apunte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/login_horizontal_margin"
+                    android:layout_marginRight="@dimen/login_horizontal_margin"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_horizontal_margin"
+                    android:paddingRight="@dimen/login_horizontal_margin"
+                    android:text="@string/label_materia"/>
+
+                <Spinner android:id="@+id/materia_apunte"
+                    android:layout_marginLeft="@dimen/login_horizontal_margin"
+                    android:layout_marginRight="@dimen/login_horizontal_margin"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="209dp"
+                    android:layout_height="47dp"
+                    android:paddingLeft="@dimen/login_horizontal_margin"
+                    android:paddingRight="@dimen/login_horizontal_margin"
+                    android:text="@string/label_fecha"/>
+
+                <EditText android:id="@+id/fecha_final_apunte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/login_horizontal_margin"
+                    android:layout_marginRight="@dimen/login_horizontal_margin"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/material_blue_grey_950"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:onClick="showDatePickerDialog"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_horizontal_margin"
+                    android:paddingRight="@dimen/login_horizontal_margin"
+                    android:text="@string/label_apuntes"/>
+
+                <EditText android:id="@+id/contenido_apunte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/login_horizontal_margin"
+                    android:layout_marginRight="@dimen/login_horizontal_margin"
+                    android:layout_marginBottom="10dp"/>
+
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>

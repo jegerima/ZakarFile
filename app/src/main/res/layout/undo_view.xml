@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_height="81dp"
+    style="@style/nowCardStyle_Task"
+    tools:ignore="overdraw"
+    android:background="@color/background_floating_material_dark">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.495">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/tarea_eliminada"
+                android:id="@+id/textView"
+                android:textSize="25dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="@color/bright_foreground_inverse_material_light"
+                android:layout_weight="0.22" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.01"
+            android:background="#fc86857f"></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.495">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/deshacer"
+                android:id="@+id/undo_section"
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/bright_foreground_inverse_material_light"
+                android:textSize="25dp"
+                android:gravity="center|center_horizontal" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SIDWeb</string>
+    <string name="title_section1">Inicio</string>
+    <string name="title_section2">Cursos</string>
+    <string name="title_section3">Tareas</string>
+    <string name="title_section4">Horarios</string>
+    <string name="title_section5">Salir</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="actionBar_settings">Ajustes</string>
+    <string name="actionBar_camera">Cámara</string>
+    <string name="actionBar_logout">Salir</string>
+    <string name="actionBar_newTask">Nueva Tarea</string>
+    <string name="txt_principal">Bienvenido a mi app</string>
+    <string name="txt_prueba">Texto de prueba</string>
+    <string name="title_activity_activity_personal_task">activity_personal_task</string>
+    <string name="new_task">Nueva Tarea</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_personal_task">personal_task</string>
+    <string name="boton_guardar">Guardar</string>
+    <string name="boton_cancelar">Cancelar</string>
+    <string name="label_titulo">Título</string>
+    <string name="label_materia">Materia</string>
+    <string name="label_apuntes">Notas</string>
+    <string name="label_fecha">Fecha de Vencimiento</string>
+    <string name="title_activity_main_activity2x">MainActivity2x</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
+    <string name="deshacer">Deshacer</string>
+    <string name="tarea_eliminada">Tarea Eliminada</string>
+
+</resources><!--
+  Copyright 2012 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
