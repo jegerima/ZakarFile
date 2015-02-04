@@ -5,7 +5,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:context="com.example.jegerima.SIDWeb.PersonalTask"
@@ -56,32 +56,45 @@
                     android:layout_marginLeft="@dimen/login_horizontal_margin"
                     android:layout_marginRight="@dimen/login_horizontal_margin"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="fill_parent"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_gravity="left"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="209dp"
+                        android:layout_height="47dp"
+                        android:paddingLeft="@dimen/login_horizontal_margin"
+                        android:paddingRight="@dimen/login_horizontal_margin"
+                        android:text="@string/label_fecha"/>
+
+                    <EditText android:id="@+id/fecha_final_apunte"
+                        android:layout_width="103dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/material_blue_grey_950"
+                        android:clickable="true"
+                        android:editable="false"
+                        android:onClick="showDatePickerDialog" />
+                    <EditText android:id="@+id/hora_final_apunte"
+                        android:layout_width="61dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/material_blue_grey_950"
+                        android:clickable="true"
+                        android:editable="false"
+                        android:onClick="showTimePickerDialog" />
 
 
+                </LinearLayout>
 
 
-                <TextView
-                    android:layout_width="209dp"
-                    android:layout_height="47dp"
-                    android:paddingLeft="@dimen/login_horizontal_margin"
-                    android:paddingRight="@dimen/login_horizontal_margin"
-                    android:text="@string/label_fecha"/>
-
-                <EditText android:id="@+id/fecha_final_apunte"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/login_horizontal_margin"
-                    android:layout_marginRight="@dimen/login_horizontal_margin"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/material_blue_grey_950"
-                    android:clickable="true"
-                    android:editable="false"
-                    android:onClick="showDatePickerDialog"
-
-                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,13 +103,20 @@
                     android:paddingRight="@dimen/login_horizontal_margin"
                     android:text="@string/label_apuntes"/>
 
-                <EditText android:id="@+id/contenido_apunte"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/login_horizontal_margin"
-                    android:layout_marginRight="@dimen/login_horizontal_margin"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_height="wrap_content">
 
+                    <EditText android:id="@+id/contenido_apunte"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_marginLeft="@dimen/login_horizontal_margin"
+                        android:layout_marginRight="@dimen/login_horizontal_margin"
+                        android:layout_marginBottom="10dp"
+                        android:background="#07261ae5"
+                        android:layout_weight="0.98" />
+
+                </RelativeLayout>
 
 
             </LinearLayout>

@@ -43,7 +43,7 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
     private EditText apuntes;
     //Para obtener fecha actual
     ContentValues valores = new ContentValues();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
     Date date = new Date();
 
@@ -75,7 +75,7 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         fecha_venc_apunte = (EditText) findViewById(R.id.fecha_final_apunte);
-
+        hora_venc_apunte = (EditText) findViewById(R.id.hora_final_apunte);
 
 
         fecha_venc_apunte.setText(dateFormat.format(date));
