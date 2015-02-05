@@ -76,12 +76,29 @@ public class DataBaseManagerNews {
         //String[] args = new String[] {"usu1"};
 
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        Cursor c = db.query(QB, campos, null, null, null, null, null);
 
-        return c;
+        return db.query(QB, campos, null, null, null, null, null);
     }
 
     public void vaciar(){
         db.delete(TABLE_NAME,null,null);
+    }
+
+    public void close(){
+        try {
+            if(helper!=null){
+                helper.close();
+                helper=null;
+            }
+
+            if(db!=null){
+                db.close();
+                db=null;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

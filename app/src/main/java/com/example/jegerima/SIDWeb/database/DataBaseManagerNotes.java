@@ -4,10 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -74,12 +72,29 @@ public class DataBaseManagerNotes {
         //String[] args = new String[] {"usu1"};
 
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        Cursor c = db.query(QB, campos, null, null, null, null, CN_FECHA_INICIAL);
 
-        return c;
+        return db.query(QB, campos, null, null, null, null, CN_FECHA_INICIAL);
     }
 
     public void vaciar(){
         db.delete(TABLE_NAME,null,null);
+    }
+
+    public void close(){
+        try {
+            if(helper!=null){
+                helper.close();
+                helper=null;
+            }
+
+            if(db!=null){
+                db.close();
+                db=null;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

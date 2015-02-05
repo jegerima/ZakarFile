@@ -1,19 +1,15 @@
 package com.example.jegerima.SIDWeb;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBarActivity;
 
@@ -21,7 +17,6 @@ import com.example.jegerima.SIDWeb.Objetos.Lista;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerNotes;
 import com.example.jegerima.SIDWeb.timedialogfragment.DatePickerFragment;
-import com.example.jegerima.SIDWeb.views.TaskView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,14 +26,12 @@ import java.util.List;
 
 public class PersonalTask extends ActionBarActivity {
     private DataBaseManagerNotes dbApuntes;
-    private Cursor cursor;
 
     private EditText titulo;
     private Spinner materia;
     private EditText fecha_venc_apunte;
     private EditText apuntes;
     //Para obtener fecha actual
-    ContentValues valores = new ContentValues();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date();
 
@@ -53,16 +46,27 @@ public class PersonalTask extends ActionBarActivity {
         apuntes = (EditText) findViewById(R.id.contenido_apunte);
         materia = (Spinner) findViewById(R.id.materia_apunte);
 
-        DataBaseManagerCourses courses =new DataBaseManagerCourses(this);
-        Cursor c = courses.consultar();
-
+        DataBaseManagerCourses courses=null;
         List<Lista> list = new ArrayList<Lista>();
-        if (c.moveToFirst()) {
-            //Recorremos el cursor hasta que no haya más registros
-            do {
-                list.add(new Lista(c.getString(0),c.getString(1)));
-            } while(c.moveToNext());
+
+        try {
+            courses=new DataBaseManagerCourses(this);
+            Cursor c = courses.consultar();
+            if (c.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    list.add(new Lista(c.getString(0),c.getString(1)));
+                } while(c.moveToNext());
+            }
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }finally {
+            if(courses!=null)
+                courses.close();
         }
+
+
 
         ArrayAdapter<Lista> dataAdapter = new ArrayAdapter<Lista>(this,android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
