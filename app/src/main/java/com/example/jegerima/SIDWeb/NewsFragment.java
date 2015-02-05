@@ -85,11 +85,6 @@ public class NewsFragment extends Fragment {
         //SWEffects.Swipe(ll,dataAdapter);
         //SWEffects.SwipeUndoAnimacion(getActivity(), ll, dataAdapter,true,0,0,0,1);//el cuarto parametro es booleano y es para indicar si se desea auto desaparicion del undo
 
-
         return V;
-
-
     }
-
-
 }

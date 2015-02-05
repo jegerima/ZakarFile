@@ -46,12 +46,12 @@ public class FragmentTabContainer extends Fragment {
             case 1: //Inicio
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentA").setIndicator("Anuncios"), NewsFragment.class, null);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentB").setIndicator("Tareas"), TasksFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentC").setIndicator("Mis Tareas"), PersonalTaskFragment.class, null);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentC").setIndicator("Apuntes"), PersonalTaskFragment.class, null);
                 break;
             case 2: //Cursos
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, null);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Planificacion"), NewsFragment.class, null);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), NewsFragment.class, null);
                 break;
             case 3: //Tareas
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, null);

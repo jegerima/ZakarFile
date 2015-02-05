@@ -164,8 +164,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             startActivity(intent);
             return true;
         }if (id == R.id.action_settings) {
-
-
+            Intent intent = new Intent(this,TaskActivity.class);
+            startActivity(intent);
             return true;
         }
         if (id == R.id.action_logout) {
@@ -222,9 +222,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         Bundle bargs = new Bundle();
         bargs.putInt("section_number", 1);
         FragmentTabInicio.setArguments(bargs);
-
-
-
     }
 
     private void initFragmentTabCursos() {
@@ -266,12 +263,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public Context prueba(){
         return this;
     }
-
-
-
-
-
-
 }
 
 
