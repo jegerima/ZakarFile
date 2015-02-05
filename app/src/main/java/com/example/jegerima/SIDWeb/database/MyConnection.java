@@ -33,8 +33,6 @@ public class MyConnection {
                 }
 */
         } catch (Exception ex) {
-            Logger lgr = Logger.getLogger(MyConnection.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
             try {
                 rs.close();
             } catch (SQLException e) {

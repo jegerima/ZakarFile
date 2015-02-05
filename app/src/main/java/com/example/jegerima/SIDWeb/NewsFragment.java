@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.adapters.SWEffects;
 import com.example.jegerima.SIDWeb.adapters.SWNewsAdapter;
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
+
 import com.example.jegerima.SIDWeb.views.NewsView;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -33,10 +34,10 @@ public class NewsFragment extends Fragment {
         //ArrayList<NewsView> list=new ArrayList<NewsView>();
         ArrayList<String[]> list=new ArrayList<String[]>();
 
-        DataBaseManagerNews dbNews=null;
+        DataBaseManagerAnnouncements dbNews=null;
         try {
 
-            dbNews = new DataBaseManagerNews(this.getActivity());
+            dbNews = new DataBaseManagerAnnouncements(this.getActivity());
             Cursor datos = dbNews.consultar();
             if (datos.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
@@ -70,11 +71,6 @@ public class NewsFragment extends Fragment {
         //SWEffects.Swipe(ll,dataAdapter);
         //SWEffects.SwipeUndoAnimacion(getActivity(), ll, dataAdapter,true,0,0,0,1);//el cuarto parametro es booleano y es para indicar si se desea auto desaparicion del undo
 
-
         return V;
-
-
     }
-
-
 }

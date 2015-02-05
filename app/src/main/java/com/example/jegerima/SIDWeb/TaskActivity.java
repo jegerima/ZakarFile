@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,33 +11,37 @@ import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 
-public class NewsActivity extends ActionBarActivity {
 
-    private String AnuncioID;
+public class TaskActivity extends ActionBarActivity {
+
+    private String TareaID;
     private String Titulo;
     private String Curso;
     private String CursoID;
     private String CursoCod;
     private String Contenido;
-    private String Fecha;
+    private String FechaInicial;
+    private String FechaEntrega;
+    private String FechaTope;
+    private String Estado;
     private String nComentarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
-        Intent intent = getIntent();
-        this.AnuncioID = intent.getStringExtra("NewsID");
-        Toast.makeText(this,this.AnuncioID,Toast.LENGTH_SHORT);
+        setContentView(R.layout.activity_task);
 
-        initData(this.AnuncioID );
+        Intent intent = getIntent();
+        this.TareaID = intent.getStringExtra("NewsID");
+        Toast.makeText(this, this.TareaID, Toast.LENGTH_SHORT);
+        initData(TareaID);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_news, menu);
+        getMenuInflater().inflate(R.menu.menu_task, menu);
         return true;
     }
 
@@ -57,31 +60,6 @@ public class NewsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDatos(){
-        DataBaseManagerNews dbNews=null;
-        try {
-
-            dbNews = new DataBaseManagerNews(this);
-            Cursor datos = dbNews.consultar(id);
-            if (datos.moveToFirst()) {
-                titulo.setText(datos.getString(0));
-                materia.setText(datos.getString(1));
-                contenido.setText(Html.fromHtml(datos.getString(2)));
-                fecha.setText(datos.getString(3));
-                mensajes.setText(datos.getString(4));
-            }
-
-        }catch (Exception e){
-            System.out.println(e.toString());
-        }finally {
-            if(dbNews!=null)
-                dbNews.close();
-        }
-
-
-
-    }
-
     private void initData(String id)
     {
         TextView titulo = (TextView) findViewById(R.id.lblTitulo);
@@ -89,11 +67,11 @@ public class NewsActivity extends ActionBarActivity {
         TextView contenido = (TextView) findViewById(R.id.lblContenido);
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
-/*
-        DataBaseManagerNews dbNews=null;
+
+        DataBaseManagerAnnouncements dbNews=null;
         try
         {
-            dbNews = new DataBaseManagerTask(this);
+            dbNews = new DataBaseManagerAnnouncements(this);
             Cursor dato = dbNews.consultar();
         }catch (Exception e)
         {
@@ -102,6 +80,7 @@ public class NewsActivity extends ActionBarActivity {
             if(dbNews!=null)
                 dbNews.close();
         }
-*/
+
+
     }
 }

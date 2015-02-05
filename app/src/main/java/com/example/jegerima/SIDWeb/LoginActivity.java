@@ -25,8 +25,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
+
 import com.example.jegerima.SIDWeb.database.MyConnection;
 
 import org.ksoap2.SoapEnvelope;
@@ -326,9 +327,10 @@ public class LoginActivity extends Activity {
                             "join courses c on e.course_id=c.id "+
                             "join enrollment_terms er on c.enrollment_term_id=er.id "+
                             "where u.id=&PV_USER&;";
-
-        String q_anuncios=  "select dc.id,dc.title,dc.context_id,dc.message,dc.posted_at,0 "+
+        //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
+        String q_anuncios=  "select dc.id,dc.context_id,c.name,dc.title,dc.message,dc.posted_at,0 "+
                             "from discussion_topics dc " +
+                            "join courses c on (c.id=dc.context_id) "+
                             "where context_id in (select c.id " +
                             "from users u " +
                             "join enrollments e on e.user_id=u.id " +
@@ -346,11 +348,12 @@ public class LoginActivity extends Activity {
                 rs = con.consulta(q_user);
                 while (rs.next()) {
                     userId=Integer.parseInt(rs.getString(1));
+                    System.out.println(userId);
                 }
 
                 rs.close();
                 rs=null;
-
+                System.out.println(q_anuncios.replace("&PV_USER&", userId + ""));
                 rs = con.consulta(q_materias.replace("&PV_USER&", userId + ""));
                 DataBaseManagerCourses courses;
                 courses= new DataBaseManagerCourses(this);
@@ -363,11 +366,12 @@ public class LoginActivity extends Activity {
                 rs=null;
 
                 rs=con.consulta(q_anuncios.replace("&PV_USER&", userId + ""));
-                DataBaseManagerNews news;
-                news= new DataBaseManagerNews(this);
+                DataBaseManagerAnnouncements news;
+                news= new DataBaseManagerAnnouncements(this);
 
                 while (rs.next()) {
-                    news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
+                    //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
+                    news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6),rs.getString(7));
                 }
 
             }
