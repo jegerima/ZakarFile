@@ -71,12 +71,27 @@ public class DataBaseManagerNews {
                 " LEFT JOIN " + TABLE_FK + " ON " +
                 TABLE_NAME+"."+CN_MATERIA_ID + " = " + TABLE_FK+"."+FK_ID;
 
-        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA,CN_N_MENSAJES};
+        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA,CN_N_MENSAJES,TABLE_NAME+"."+CN_ID};
         //String[] args = new String[] {"usu1"};
 
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
         return db.query(QB, campos, null, null, null, null, CN_FECHA);
+    }
+
+    public Cursor consultar(int id){
+        //insert  into contactos
+
+        String QB=TABLE_NAME +
+                " LEFT JOIN " + TABLE_FK + " ON " +
+                TABLE_NAME+"."+CN_MATERIA_ID + " = " + TABLE_FK+"."+FK_ID;
+
+        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA,CN_N_MENSAJES,TABLE_NAME+"."+CN_ID};
+        String[] args = new String[] {id+""};
+
+        //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
+
+        return db.query(QB, campos, TABLE_NAME+"." +CN_ID+"=?", args, null, null, null);
     }
 
     public void vaciar(){

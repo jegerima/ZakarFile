@@ -30,7 +30,8 @@ public class NewsFragment extends Fragment {
 
         View V = inflater.inflate(R.layout.fragment_news, container, false);
         final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_news);
-        ArrayList<NewsView> list=new ArrayList<NewsView>();
+        //ArrayList<NewsView> list=new ArrayList<NewsView>();
+        ArrayList<String[]> list=new ArrayList<String[]>();
 
         DataBaseManagerNews dbNews=null;
         try {
@@ -41,26 +42,10 @@ public class NewsFragment extends Fragment {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
                     //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
-                    NewsView nv= new NewsView(this.getActivity());
-                    nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
-                    /*
-                    nv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), NewsActivity.class);
-                            intent.putExtra("NewsID", "id del anuncio para cargar de la base");
-                            startActivity(intent);
-                        }
-                    });
-                    nv.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
-                            Toast.makeText(getActivity().getBaseContext(),"Long Click",Toast.LENGTH_SHORT);
-                            return false;
-                        }
-                    });
-                    */
-                    list.add(nv);
+                    //NewsView nv= new NewsView(this.getActivity());
+                    //nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
+
+                    list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5)});
                 } while(datos.moveToNext());
             }
 

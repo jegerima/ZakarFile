@@ -1,17 +1,44 @@
 package com.example.jegerima.SIDWeb;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
 
 
 public class NewsActivity extends ActionBarActivity {
 
+    int id;
+    TextView titulo;
+    TextView materia;
+    TextView contenido;
+    TextView fecha;
+    TextView mensajes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        Intent intent=getIntent();
+        String d=intent.getStringExtra("Titulo");
+        System.out.println(d);
+        id=intent.getIntExtra("NewsID",-1);
+
+        titulo = (TextView) findViewById(R.id.lblTitulo);
+        materia = (TextView) findViewById(R.id.lblMateria);
+        contenido = (TextView) findViewById(R.id.lblContenido);
+        fecha = (TextView) findViewById(R.id.lblFecha);
+        mensajes = (TextView) findViewById(R.id.lblNMensajes);
+
+        setDatos();
+
+
+
     }
 
 
@@ -35,5 +62,30 @@ public class NewsActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setDatos(){
+        DataBaseManagerNews dbNews=null;
+        try {
+
+            dbNews = new DataBaseManagerNews(this);
+            Cursor datos = dbNews.consultar(id);
+            if (datos.moveToFirst()) {
+                titulo.setText(datos.getString(0));
+                materia.setText(datos.getString(1));
+                contenido.setText(Html.fromHtml(datos.getString(2)));
+                fecha.setText(datos.getString(3));
+                mensajes.setText(datos.getString(4));
+            }
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }finally {
+            if(dbNews!=null)
+                dbNews.close();
+        }
+
+
+
     }
 }

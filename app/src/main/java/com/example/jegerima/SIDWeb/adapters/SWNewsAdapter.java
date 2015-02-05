@@ -2,6 +2,7 @@ package com.example.jegerima.SIDWeb.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class SWNewsAdapter extends SWAdapter {
     Context context;
 
-    public SWNewsAdapter(Context context, ArrayList<NewsView> users) {
+    public SWNewsAdapter(Context context, ArrayList<String[]> users) {
         super(context, users);
         this.context=context;
     }
@@ -28,7 +29,8 @@ public class SWNewsAdapter extends SWAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        NewsView news = (NewsView)getItem(position);
+        //NewsView news = (NewsView)getItem(position);
+        String[] datos=(String[])getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_news, parent, false);
@@ -42,18 +44,21 @@ public class SWNewsAdapter extends SWAdapter {
         TextView mensajes = (TextView) convertView.findViewById(R.id.lblNMensajes);
 
         //voy seteando el contenido de cada uno
-        titulo.setText(news.getmTitulo().getText());
-        materia.setText(news.getmMateria().getText());
-        contenido.setText(news.getmContenido().getText());
-        fecha.setText(news.getmFecha().getText());
-        mensajes.setText(news.getmNMensajes().getText());
+        titulo.setText(datos[0]);
+        materia.setText(datos[1]);
+        contenido.setText(Html.fromHtml(datos[2]));
+        fecha.setText(datos[3]);
+        mensajes.setText(datos[4]);
+        final int id=Integer.parseInt(datos[5]);
+        final String title=datos[0];
         // Return the completed view to render on screen
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        convertView.findViewById(R.id.frmNews).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), NewsActivity.class);
-                intent.putExtra("NewsID", "id del anuncio para cargar de la base");
+                intent.putExtra("NewsID", id);
+                intent.putExtra("Titulo", title);
                 getContext().startActivity(intent);
             }
         });
