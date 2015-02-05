@@ -47,7 +47,7 @@ public class DataBaseManagerNotes {
     }
     public ContentValues generarContentValues(String titulo,String materia,String contenido,Date fecha_final){
         ContentValues valores = new ContentValues();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date = new Date();
         valores.put(CN_TITULO,titulo);
         valores.put(CN_MATERIA_ID,materia);
@@ -68,12 +68,12 @@ public class DataBaseManagerNotes {
                 " LEFT JOIN " + TABLE_FK + " ON " +
                 TABLE_NAME+"."+CN_MATERIA_ID + " = " + TABLE_FK+"."+FK_ID;
 
-        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA_INICIAL};
+        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA_FINAL};
         //String[] args = new String[] {"usu1"};
 
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
-        return db.query(QB, campos, null, null, null, null, CN_FECHA_INICIAL);
+        return db.query(QB, campos, null, null, null, null, CN_FECHA_FINAL);
     }
 
     public void vaciar(){

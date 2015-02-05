@@ -131,12 +131,16 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         // Obtenemos los datos del formulario
         //
         SimpleDateFormat dateFormatNew = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date d=new Date();
+        Date d;;
         Calendar c= Calendar.getInstance();
-        c.set(fecha.getYear()+1900, fecha.getMonth(), fecha.getDate(), tiempo.getHours(), tiempo.getMinutes());
-        d.setTime(c.getTimeInMillis());
-        dbApuntes.insertar(titulo.getText().toString(),((Lista)materia.getSelectedItem()).getCodigo(),apuntes.getText().toString(),d);
-        System.out.print(titulo.getText().toString()+((Lista)materia.getSelectedItem()).getCodigo()+apuntes.getText().toString());
+        //c.set(fecha.getYear()+1900, fecha.getMonth(), fecha.getDate(), tiempo.getHours(), tiempo.getMinutes());
+        //d.setTime(c.getTimeInMillis());
+        System.out.println(fecha);
+        c.setTime(fecha);
+        c.set(Calendar.HOUR,tiempo.getHours());
+        c.set(Calendar.MINUTE, tiempo.getMinutes());
+
+        dbApuntes.insertar(titulo.getText().toString(),((Lista)materia.getSelectedItem()).getCodigo(),apuntes.getText().toString(),c.getTime());
         Toast.makeText(PersonalTask.this,"Apunte guardado",Toast.LENGTH_SHORT).show();
 
         setResult(RESULT_OK);
@@ -191,7 +195,7 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         calendario.set(Calendar.YEAR, year);
         calendario.set(Calendar.MONTH, monthOfYear);
         calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
+        fecha=new Date();
         fecha.setTime(calendario.getTimeInMillis());
         fecha_venc_apunte.setText(dateFormat.format(fecha));
 
@@ -202,7 +206,7 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         Calendar hora = Calendar.getInstance();
         hora.set(Calendar.HOUR,hourOfDay);
         hora.set(Calendar.MINUTE,minute);
-
+        tiempo=new Date();
         tiempo.setTime(hora.getTimeInMillis());
         hora_venc_apunte.setText(timeFormat.format(tiempo));
     }

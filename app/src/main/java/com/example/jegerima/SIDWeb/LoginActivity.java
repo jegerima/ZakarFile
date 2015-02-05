@@ -9,8 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -367,7 +365,7 @@ public class LoginActivity extends Activity {
                 news= new DataBaseManagerNews(this);
 
                 while (rs.next()) {
-                    news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), new Date(), rs.getString(6));
+                    news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6));
                 }
 
             }
