@@ -26,8 +26,8 @@ import android.widget.Toast;
 import org.postgresql.Driver;
 
 
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerNotes;
 import com.example.jegerima.SIDWeb.database.MyConnection;
 
@@ -68,9 +68,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Creación inserción de datos en la base de datos
-        DataBaseManagerNews manager;
-        manager= new DataBaseManagerNews(this);
+
 
         //manager.insertar("12346","IHM","16144","asdasdasasd",new Date(),"0");
         //manager.insertar("23456","IA","Pelaez");
@@ -198,7 +196,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         DataBaseManagerNotes notes= new DataBaseManagerNotes(this);
         notes.vaciar();
-        DataBaseManagerNews news= new DataBaseManagerNews(this);
+        DataBaseManagerAnnouncements news= new DataBaseManagerAnnouncements(this);
         news.vaciar();
         DataBaseManagerCourses courses= new DataBaseManagerCourses(this);
         courses.vaciar();
