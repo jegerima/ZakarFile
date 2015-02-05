@@ -1,20 +1,19 @@
 package com.example.jegerima.SIDWeb;
 
-import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.support.v7.app.ActionBarActivity;
 
@@ -117,7 +116,7 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
                 }
             }
         });
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
