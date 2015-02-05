@@ -40,6 +40,7 @@ public class NewsFragment extends Fragment {
             dbNews = new DataBaseManagerAnnouncements(this.getActivity());
             Cursor datos = dbNews.consultar();
             if (datos.moveToFirst()) {
+
                 //Recorremos el cursor hasta que no haya más registros
                 do {
                     //y voy creando nuevos anuncios para luego irlos añadiendo a la lista

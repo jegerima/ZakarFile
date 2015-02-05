@@ -62,16 +62,21 @@ public class DataBaseManagerAnnouncements {
     public Cursor consultar(){
         //insert  into contactos
 
-        /*String QB=TABLE_NAME +
-                " LEFT JOIN " + TABLE_FK + " ON " +
-                TABLE_NAME+"."+ID_COURSE + " = " + TABLE_FK+"."+FK_ID;*/
-
-        String[] campos = new String[] {TITLE, COURSE_NAME,CONTENT,DATE,NUM_MSG};
-        //String[] args = new String[] {"usu1"};
-
+        String[] campos = new String[] {TITLE, COURSE_NAME,CONTENT,DATE,NUM_MSG,ANNOUNCEMENTS_ID};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
         return db.query(TABLE_NAME, campos, null, null, null, null, null);
+    }
+
+    public Cursor consultar(String id){
+        //insert  into contactos
+
+        String[] campos = new String[] {TITLE, COURSE_NAME,CONTENT,DATE,NUM_MSG,ANNOUNCEMENTS_ID};
+        String[] args = new String[] {id};
+        //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
+
+        return db.query(TABLE_NAME, campos, ANNOUNCEMENTS_ID+"=?", args, null, null, null);
+
     }
     public void vaciar(){
         db.delete(TABLE_NAME,null,null);

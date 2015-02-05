@@ -49,7 +49,7 @@ public class SWNewsAdapter extends SWAdapter {
         contenido.setText(Html.fromHtml(datos[2]));
         fecha.setText(datos[3]);
         mensajes.setText(datos[4]);
-        final int id=Integer.parseInt(datos[5]);
+        final String id=datos[5];
         final String title=datos[0];
         // Return the completed view to render on screen
 

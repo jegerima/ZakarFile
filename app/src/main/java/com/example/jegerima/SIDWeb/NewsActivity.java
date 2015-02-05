@@ -31,7 +31,7 @@ public class NewsActivity extends ActionBarActivity {
         this.AnuncioID = intent.getStringExtra("NewsID");
         Toast.makeText(this,this.AnuncioID,Toast.LENGTH_SHORT);
 
-        initData(this.AnuncioID );
+        initData(this.AnuncioID);
     }
 
 
@@ -57,12 +57,21 @@ public class NewsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDatos(){
-        DataBaseManagerNews dbNews=null;
+
+
+    private void initData(String id)
+    {
+        TextView titulo = (TextView) findViewById(R.id.lblTitulo);
+        TextView materia = (TextView) findViewById(R.id.lblMateria);
+        TextView contenido = (TextView) findViewById(R.id.lblContenido);
+        TextView fecha = (TextView) findViewById(R.id.lblFecha);
+        TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
+
+        DataBaseManagerAnnouncements dbNews=null;
         try {
 
-            dbNews = new DataBaseManagerNews(this);
-            Cursor datos = dbNews.consultar(id);
+            dbNews = new DataBaseManagerAnnouncements(this);
+            Cursor datos = dbNews.consultar(AnuncioID);
             if (datos.moveToFirst()) {
                 titulo.setText(datos.getString(0));
                 materia.setText(datos.getString(1));
@@ -77,31 +86,5 @@ public class NewsActivity extends ActionBarActivity {
             if(dbNews!=null)
                 dbNews.close();
         }
-
-
-
-    }
-
-    private void initData(String id)
-    {
-        TextView titulo = (TextView) findViewById(R.id.lblTitulo);
-        TextView materia = (TextView) findViewById(R.id.lblMateria);
-        TextView contenido = (TextView) findViewById(R.id.lblContenido);
-        TextView fecha = (TextView) findViewById(R.id.lblFecha);
-        TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
-/*
-        DataBaseManagerNews dbNews=null;
-        try
-        {
-            dbNews = new DataBaseManagerTask(this);
-            Cursor dato = dbNews.consultar();
-        }catch (Exception e)
-        {
-            System.out.println(e.toString());
-        }finally {
-            if(dbNews!=null)
-                dbNews.close();
-        }
-*/
     }
 }
