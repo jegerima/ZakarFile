@@ -35,6 +35,14 @@
             android:label="@string/new_task"
             android:parentActivityName=".MainActivity" >
         </activity>
+        <activity
+            android:name=".NewsActivity"
+            android:label="@string/title_activity_news"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jegerima.SIDWeb.MainActivity" />
+        </activity>
     </application>
 
 </manifest><!--

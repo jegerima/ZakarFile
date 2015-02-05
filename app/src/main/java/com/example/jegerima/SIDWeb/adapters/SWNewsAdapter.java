@@ -1,11 +1,13 @@
 package com.example.jegerima.SIDWeb.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jegerima.SIDWeb.NewsActivity;
 import com.example.jegerima.SIDWeb.R;
 import com.example.jegerima.SIDWeb.views.NewsView;
 
@@ -46,6 +48,16 @@ public class SWNewsAdapter extends SWAdapter {
         fecha.setText(news.getmFecha().getText());
         mensajes.setText(news.getmNMensajes().getText());
         // Return the completed view to render on screen
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewsActivity.class);
+                intent.putExtra("NewsID", "id del anuncio para cargar de la base");
+                getContext().startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 }
