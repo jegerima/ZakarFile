@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 
 public class NewsActivity extends ActionBarActivity {
 

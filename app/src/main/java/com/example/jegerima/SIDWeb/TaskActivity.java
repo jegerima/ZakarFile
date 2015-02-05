@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 
 
 public class TaskActivity extends ActionBarActivity {
@@ -68,10 +68,10 @@ public class TaskActivity extends ActionBarActivity {
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
 
-        DataBaseManagerNews dbNews=null;
+        DataBaseManagerAnnouncements dbNews=null;
         try
         {
-            dbNews = new DataBaseManagerNews(this);
+            dbNews = new DataBaseManagerAnnouncements(this);
             Cursor dato = dbNews.consultar();
         }catch (Exception e)
         {
