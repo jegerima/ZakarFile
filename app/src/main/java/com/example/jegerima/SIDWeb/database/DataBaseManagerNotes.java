@@ -53,7 +53,7 @@ public class DataBaseManagerNotes {
         valores.put(CN_MATERIA_ID,materia);
         valores.put(CN_CONTENIDO,contenido);
         valores.put(CN_FECHA_INICIAL,dateFormat.format(date));
-        //if(fecha_final!=null)valores.put(CN_FECHA_FINAL,dateFormat.format(fecha_final));
+        if(fecha_final!=null)valores.put(CN_FECHA_FINAL,dateFormat.format(fecha_final));
         return valores;
     }
     public void insertar(String titulo,String materia,String contenido,Date fecha_final){

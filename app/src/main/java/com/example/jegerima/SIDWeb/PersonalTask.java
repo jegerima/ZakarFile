@@ -38,6 +38,8 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
     private Spinner materia;
     private EditText fecha_venc_apunte;
     private EditText hora_venc_apunte;
+    private Date fecha=new Date();
+    private Date tiempo=new Date();
     //Para obtener fecha actual
 
     private EditText apuntes;
@@ -59,10 +61,12 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         materia = (Spinner) findViewById(R.id.materia_apunte);
 
         DataBaseManagerCourses courses=null;
+
         List<Lista> list = new ArrayList<Lista>();
 
         try {
             courses=new DataBaseManagerCourses(this);
+            //courses.insertar("12","INTERACCION HOMBRE MAQUINA","Guido");
             Cursor c = courses.consultar();
             if (c.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
@@ -126,7 +130,12 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         //
         // Obtenemos los datos del formulario
         //
-        dbApuntes.insertar(titulo.getText().toString(),((Lista)materia.getSelectedItem()).getCodigo(),apuntes.getText().toString(),null);
+        SimpleDateFormat dateFormatNew = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date d=new Date();
+        Calendar c= Calendar.getInstance();
+        c.set(fecha.getYear()+1900, fecha.getMonth(), fecha.getDate(), tiempo.getHours(), tiempo.getMinutes());
+        d.setTime(c.getTimeInMillis());
+        dbApuntes.insertar(titulo.getText().toString(),((Lista)materia.getSelectedItem()).getCodigo(),apuntes.getText().toString(),d);
         System.out.print(titulo.getText().toString()+((Lista)materia.getSelectedItem()).getCodigo()+apuntes.getText().toString());
         Toast.makeText(PersonalTask.this,"Apunte guardado",Toast.LENGTH_SHORT).show();
 
@@ -182,9 +191,9 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         calendario.set(Calendar.YEAR, year);
         calendario.set(Calendar.MONTH, monthOfYear);
         calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        Date d = new Date();
-        d.setTime(calendario.getTimeInMillis());
-        fecha_venc_apunte.setText(dateFormat.format(d));
+
+        fecha.setTime(calendario.getTimeInMillis());
+        fecha_venc_apunte.setText(dateFormat.format(fecha));
 
     }
 
@@ -193,8 +202,8 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         Calendar hora = Calendar.getInstance();
         hora.set(Calendar.HOUR,hourOfDay);
         hora.set(Calendar.MINUTE,minute);
-        Date d = new Date();
-        d.setTime(hora.getTimeInMillis());
-        hora_venc_apunte.setText(timeFormat.format(d));
+
+        tiempo.setTime(hora.getTimeInMillis());
+        hora_venc_apunte.setText(timeFormat.format(tiempo));
     }
 }

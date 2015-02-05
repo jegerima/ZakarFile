@@ -6,6 +6,8 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
+import com.example.jegerima.SIDWeb.PersonalTask;
+
 import java.util.Calendar;
 
 /**
@@ -24,7 +26,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), (PersonalTask)getActivity(), year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
