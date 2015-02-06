@@ -4,12 +4,14 @@ package com.example.jegerima.SIDWeb;
  * Created by Jegerima on 22/01/2015.
  */
 //import com.nhaarman.listviewanimations.appearance.*;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.adapters.SWEffects;
 import com.example.jegerima.SIDWeb.adapters.SWNewsAdapter;
@@ -42,6 +44,23 @@ public class NewsFragment extends Fragment {
                     //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
                     NewsView nv= new NewsView(this.getActivity());
                     nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
+                    /*
+                    nv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), NewsActivity.class);
+                            intent.putExtra("NewsID", "id del anuncio para cargar de la base");
+                            startActivity(intent);
+                        }
+                    });
+                    nv.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast.makeText(getActivity().getBaseContext(),"Long Click",Toast.LENGTH_SHORT);
+                            return false;
+                        }
+                    });
+                    */
                     list.add(nv);
                 } while(datos.moveToNext());
             }
