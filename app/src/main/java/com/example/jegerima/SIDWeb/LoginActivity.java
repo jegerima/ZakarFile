@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jegerima.SIDWeb.database.DataBaseManageTask;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
 
@@ -374,8 +374,8 @@ public class LoginActivity extends Activity {
                 }
 
                 rs=con.consulta(q_task);
-                DataBaseManageTask tasks;
-                tasks=new DataBaseManageTask(this);
+                DataBaseManagerTask tasks;
+                tasks=new DataBaseManagerTask(this);
 
                 while (rs.next()){
                     //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)

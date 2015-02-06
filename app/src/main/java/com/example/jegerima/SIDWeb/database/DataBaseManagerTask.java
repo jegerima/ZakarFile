@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by USUARIO on 05-feb-15.
  */
-public class DataBaseManageTask {
+public class DataBaseManagerTask {
     public static final  String TABLE_NAME = "task";
     public static final  String TASK_ID = "_id";
     public static final  String ID_COURSE = "course_id";
@@ -40,7 +40,7 @@ public class DataBaseManageTask {
             + DEAD_LINE +" TIMESTAMP NULL)";
             //+ " FOREIGN KEY("+ID_COURSE+") REFERENCES "+TABLE_FK+"("+FK_ID+"));";
 
-    public DataBaseManageTask(Context contexto) {
+    public DataBaseManagerTask(Context contexto) {
         helper = new DbHelper(contexto);
         db = helper.getWritableDatabase();
     }
