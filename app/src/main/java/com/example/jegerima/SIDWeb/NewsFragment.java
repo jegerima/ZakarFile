@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.jegerima.SIDWeb.adapters.SWEffects;
 import com.example.jegerima.SIDWeb.adapters.SWNewsAdapter;
-import com.example.jegerima.SIDWeb.database.DataBaseManagerNews;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
+
 import com.example.jegerima.SIDWeb.views.NewsView;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -30,10 +31,10 @@ public class NewsFragment extends Fragment {
         final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_news);
         ArrayList<NewsView> list=new ArrayList<NewsView>();
 
-        DataBaseManagerNews dbNews=null;
+        DataBaseManagerAnnouncements dbNews=null;
         try {
 
-            dbNews = new DataBaseManagerNews(this.getActivity());
+            dbNews = new DataBaseManagerAnnouncements(this.getActivity());
             Cursor datos = dbNews.consultar();
             if (datos.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
