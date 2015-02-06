@@ -2,29 +2,23 @@ package com.example.jegerima.SIDWeb;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jegerima.SIDWeb.database.DataBaseManageTask;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
 
@@ -38,9 +32,6 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class LoginActivity extends Activity {
@@ -271,7 +262,7 @@ public class LoginActivity extends Activity {
             log_bool = null;
             log_bool = login(params[0], params[1]);
             if(log_bool.equalsIgnoreCase("true"));
-                getMaterias_Anuncios();
+                getCourses_Announcements_Task();
 
             for (int i = 0; i < 100; i++) {
                 if (!this.isCancelled()) {
@@ -317,11 +308,12 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private void getMaterias_Anuncios(){
+    private void getCourses_Announcements_Task(){
 
         MyConnection con = null;
         ResultSet rs=null;
-        String q_materias=  "select c.id as course_id, c.name, c.course_code "+
+        //insertar(String id,String code, String name,String term,String teacher)
+        String q_curos=  "select c.id as course_id,c.course_code, c.name, er.name, c.id_teacher "+
                             "from users u " +
                             "join enrollments e on e.user_id=u.id "+
                             "join courses c on e.course_id=c.id "+
@@ -337,6 +329,12 @@ public class LoginActivity extends Activity {
                             "join courses c on e.course_id=c.id " +
                             "join enrollment_terms er on c.enrollment_term_id=er.id " +
                             "where u.id=&PV_USER&);";
+        //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)
+        String q_task= "select a.id, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso " +
+                            "from assignments a " +
+                            "left join submissions s on a.id=s.assignment_id " +
+                            "where context_id=16144 and submission_types not like '%quiz%';";
+
 
         String q_user=      "select user_id "+
                             "from pseudonyms "+
@@ -354,12 +352,13 @@ public class LoginActivity extends Activity {
                 rs.close();
                 rs=null;
                 System.out.println(q_anuncios.replace("&PV_USER&", userId + ""));
-                rs = con.consulta(q_materias.replace("&PV_USER&", userId + ""));
+                rs = con.consulta(q_curos.replace("&PV_USER&", userId + ""));
                 DataBaseManagerCourses courses;
                 courses= new DataBaseManagerCourses(this);
 
                 while (rs.next()) {
-                    courses.insertar(rs.getString(1),rs.getString(2),"" );
+                    //insertar(String id,String code, String name,Date term,String teacher)
+                    courses.insertar(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5) );
                 }
 
                 rs.close();
@@ -373,6 +372,17 @@ public class LoginActivity extends Activity {
                     //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
                     news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6),rs.getString(7));
                 }
+
+                rs=con.consulta(q_task);
+                DataBaseManageTask tasks;
+                tasks=new DataBaseManageTask(this);
+
+                while (rs.next()){
+                    //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)
+                    tasks.insertar(rs.getString(1),"16144","Ing software II",rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),rs.getDate(6));
+                }
+                rs.close();
+                rs=null;
 
             }
         } catch (Exception e) {

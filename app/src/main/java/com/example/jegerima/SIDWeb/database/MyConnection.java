@@ -24,9 +24,7 @@ public class MyConnection {
 
     public ResultSet consulta(String query){
         try {
-            System.out.println("ssssss");
             rs = st.executeQuery(query);
-            System.out.println("dddddd");
 /*
                 if (rs.next()) {
                     System.out.println(rs.getString(1));
@@ -50,12 +48,9 @@ public class MyConnection {
 
     public MyConnection(){
         try{
-            System.out.println("aqui llego");
             System.out.println(URL);
             Class.forName("org.postgresql.Driver");
-            System.out.println("ojo");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("aqui aquedo");
             st = con.createStatement();
             active=true;
 
