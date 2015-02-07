@@ -259,8 +259,9 @@ public class LoginActivity extends Activity {
         protected String doInBackground(String... params) {
             // TODO: attempt authentication against a network service.
             mProgress.setProgress(0);
-            log_bool = null;
-            log_bool = login(params[0], params[1]);
+            log_bool = null;/*
+            log_bool = login(params[0], params[1]);*/
+            log_bool="true";
             if(log_bool.equalsIgnoreCase("true"));
                 getCourses_Announcements_Task();
 

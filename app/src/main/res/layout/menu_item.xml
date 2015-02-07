@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:id="@+id/menu_item">
 
@@ -10,6 +11,8 @@
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:id="@+id/title"
         android:gravity="center_vertical"
         android:textStyle="bold" />

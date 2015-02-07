@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.Objetos.Lista;
+import com.example.jegerima.SIDWeb.adapters.SWAnimation;
 import com.example.jegerima.SIDWeb.adapters.SWEffects;
 import com.example.jegerima.SIDWeb.adapters.SWMenuAdapter;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
@@ -109,14 +110,18 @@ public class NavigationDrawerFragment extends Fragment {
 
                 //si se selecciona Cursos entonces se pasa a hacer visible las materias o se las oculta
                 if(position==1) {
-                    int vis;
+                    boolean isVisible;
                     if(mDrawerListView.getChildAt(3).findViewById(R.id.title).getVisibility()==View.VISIBLE && n_materias>0)
-                        vis=View.GONE;
+                        isVisible=true;
                     else
-                        vis=View.VISIBLE;
+                        isVisible=false;
 
                     for(int i =0;i<n_materias;i++){
-                        mDrawerListView.getChildAt(i+2).findViewById(R.id.title).setVisibility(vis);
+                        //mDrawerListView.getChildAt(i+2).findViewById(R.id.title).setVisibility(vis);
+                        if(isVisible==false)
+                            SWAnimation.expand(mDrawerListView.getChildAt(i + 2).findViewById(R.id.title));
+                        else
+                            SWAnimation.collapse(mDrawerListView.getChildAt(i + 2).findViewById(R.id.title));
                     }
                 }
 

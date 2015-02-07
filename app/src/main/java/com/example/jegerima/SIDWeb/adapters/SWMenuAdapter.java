@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class SWMenuAdapter extends ArrayAdapter<String[]> {
 
     Context context;
-    public static int OPEN=View.GONE;
+    public static int OPEN=View.GONE;//estado statico que indica si esta abierto o cerrado el panel de materias
 
     public SWMenuAdapter(Context context,ArrayList<String[]> list) {
         super(context,0,list);
@@ -37,13 +37,15 @@ public class SWMenuAdapter extends ArrayAdapter<String[]> {
         String d=datos[0];
         String op=datos[1];
 
+        //en caso que op sea diferente de -1 significa que es una opcion normal, si es -1 es una materia
         if(!op.equalsIgnoreCase("-1"))
             ((TextView) convertView.findViewById(R.id.id)).setText(op);
-        else {
-            ((TextView) convertView.findViewById(R.id.id)).setText("-" + datos[2]);
+        else {//al ser materia usamos el campo oculto de nuetro layout para recuperar el id del curso
+            ((TextView) convertView.findViewById(R.id.id)).setText("-" + datos[2]);//<--
             d="-"+d;
             convertView.findViewById(R.id.title).setVisibility(OPEN);
-            ((TextView) convertView.findViewById(R.id.title)).setTextSize(15);
+            ((TextView) convertView.findViewById(R.id.title)).setTextSize(12);
+            convertView.setPadding(0,0,0,0);
             convertView.findViewById(R.id.title).setBackgroundColor(R.color.background_material_dark);
         }
 
