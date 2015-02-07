@@ -22,10 +22,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 import android.widget.Toast;
 import org.postgresql.Driver;
 
 
+import com.example.jegerima.SIDWeb.adapters.SWMenuAdapter;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerNotes;
@@ -68,12 +70,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        //manager.insertar("12346","IHM","16144","asdasdasasd",new Date(),"0");
-        //manager.insertar("23456","IA","Pelaez");
-        //manager.insertar("34567","Digitales","Ponguillo");
-        //manager.insertar("34567","Micro","Marcia");
+        SWMenuAdapter.OPEN= View.GONE;
 
 
         //initFragmentTabInicio();
@@ -108,6 +105,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
             case 4:
                 logout();
+                break;
+            //Default sera usado para las Materias
+            default:
+                transaction.replace(R.id.container, FragmentTabCursos);
                 break;
         }
         onSectionAttached(position + 1);
@@ -258,9 +259,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     }
 
 
-    public Context prueba(){
-        return this;
-    }
 }
 
 

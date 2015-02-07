@@ -1,6 +1,7 @@
 package com.example.jegerima.SIDWeb;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -20,8 +21,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jegerima.SIDWeb.Objetos.Lista;
+import com.example.jegerima.SIDWeb.adapters.SWEffects;
+import com.example.jegerima.SIDWeb.adapters.SWMenuAdapter;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -58,6 +69,8 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private int codigo=0;
+    private int n_materias;
 
     public NavigationDrawerFragment() {
     }
@@ -92,8 +105,50 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { selectItem(position);}
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //si se selecciona Cursos entonces se pasa a hacer visible las materias o se las oculta
+                if(position==1) {
+                    int vis;
+                    if(mDrawerListView.getChildAt(3).findViewById(R.id.title).getVisibility()==View.VISIBLE && n_materias>0)
+                        vis=View.GONE;
+                    else
+                        vis=View.VISIBLE;
+
+                    for(int i =0;i<n_materias;i++){
+                        mDrawerListView.getChildAt(i+2).findViewById(R.id.title).setVisibility(vis);
+                    }
+                }
+
+                else {
+                    String cod=((TextView)mDrawerListView.getChildAt(position).findViewById(R.id.id)).getText().toString();
+                    //al seleccionar una opcion que no sea cursos o alguna materia se manda señal para ocultar la vista de las materias
+                    if(position>1 && position<2+n_materias)
+                        SWMenuAdapter.OPEN=View.VISIBLE;
+                    else
+                        SWMenuAdapter.OPEN=View.GONE;
+
+                    //se recibe el codigo de la materia o de opcion del menu
+                    codigo=Integer.parseInt(cod);
+                    selectItem(position);
+
+                }
+
+            }
         });
+
+
+        ArrayList<String[]> list=new ArrayList<String[]>();
+        list.add(new String[]{"Inicio","0"});
+        list.add(new String[]{"Curso", "1"});
+        addSubjects(list);//se consulta a la base de datos para llenar las materias
+        list.add(new String[]{"Tareas","2"});
+        list.add(new String[]{"Horario","3"});
+        list.add(new String[]{"Salir", "4"});
+        SWMenuAdapter swm= new SWMenuAdapter(getActionBar().getThemedContext(),list);
+        //SWEffects.animation(mDrawerListView,swm,1,0,0,0);
+        mDrawerListView.setAdapter(swm);
+        /*
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
@@ -105,6 +160,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section5)+" ( "+getActionBar().getThemedContext().getSharedPreferences(LoginActivity.MyPREFERENCES,
                         Context.MODE_PRIVATE).getString("llaveUsuarioSIDWeb",null)+" )",
                 }));
+                */
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -195,7 +251,8 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
+            mCallbacks.onNavigationDrawerItemSelected(codigo);
+            //mCallbacks.onNavigationDrawerItemSelected(position);
         }
     }
 
@@ -277,4 +334,26 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+    public void addSubjects(ArrayList<String[]> list){
+        //se consultan las materias para agregar al menu
+        DataBaseManagerCourses courses=null;
+        try {
+            courses=new DataBaseManagerCourses(this.getActionBar().getThemedContext());
+            Cursor c = courses.consultar();
+            n_materias=c.getCount();//calculamos la cantidad de materias
+            if (c.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    list.add(new String[]{c.getString(1),"-1",c.getString(0)});
+                } while(c.moveToNext());
+            }
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }finally {
+            if(courses!=null)
+                courses.close();
+        }
+
+    };
 }

@@ -28,21 +28,17 @@ public class PersonalTaskFragment extends Fragment {
 
         View V = inflater.inflate(R.layout.fragment_personal_task, container, false);
         final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_personal_task);
-        ArrayList<TaskView> list=new ArrayList<TaskView>();
+        ArrayList<String []> list=new ArrayList<String []>();
 
         DataBaseManagerNotes dbApuntes=null;
 
         try {
-
             dbApuntes = new DataBaseManagerNotes(this.getActivity());
             Cursor datos = dbApuntes.consultar();
             if (datos.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
-                    //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
-                    TaskView nv= new TaskView(this.getActivity());
-                    nv.setParams(datos.getString(0), datos.getString(1), " ", datos.getString(3), 0, 0);
-                    list.add(nv);
+                    list.add(new String []{datos.getString(0),datos.getString(1),datos.getString(2),datos.getString(3),datos.getString(4)});
                 } while(datos.moveToNext());
             }
 
