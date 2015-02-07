@@ -22,7 +22,7 @@ public class DataBaseManagerNotes {
     public static final String CN_FECHA_FINAL = "fechafinal";
 
     //Para FK
-    public static final  String TABLE_FK="cursos";
+    public static final  String TABLE_FK="courses";
     public static final String FK_ID = "_id";
 
 
@@ -68,7 +68,7 @@ public class DataBaseManagerNotes {
                 " LEFT JOIN " + TABLE_FK + " ON " +
                 TABLE_NAME+"."+CN_MATERIA_ID + " = " + TABLE_FK+"."+FK_ID;
 
-        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.CURSO_NOMBRE,CN_CONTENIDO,CN_FECHA_FINAL};
+        String[] campos = new String[] {CN_TITULO, TABLE_FK+"."+DataBaseManagerCourses.NAME,CN_CONTENIDO,CN_FECHA_FINAL};
         //String[] args = new String[] {"usu1"};
 
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);

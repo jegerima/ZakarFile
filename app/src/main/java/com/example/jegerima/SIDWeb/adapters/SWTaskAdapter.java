@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class SWTaskAdapter extends SWAdapter{
     Context context;
 
-    public SWTaskAdapter(Context context, ArrayList<TaskView> users) {
+    public SWTaskAdapter(Context context, ArrayList<String []> users) {
         super(context, users);
         this.context=context;
     }
@@ -25,7 +25,7 @@ public class SWTaskAdapter extends SWAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        TaskView task = (TaskView)getItem(position);
+        String[] datos=(String[])getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_personal_tasks, parent, false);
@@ -33,17 +33,34 @@ public class SWTaskAdapter extends SWAdapter{
 
         //obtengo cada uno de los TextView del view de mis tareas
         TextView titulo = (TextView) convertView.findViewById(R.id.lblTitulo);
-        TextView estado = (TextView) convertView.findViewById(R.id.lblEstado);
         TextView materia = (TextView) convertView.findViewById(R.id.lblMateria);
+        TextView estado = (TextView) convertView.findViewById(R.id.lblEstado);
         TextView fecha = (TextView) convertView.findViewById(R.id.lblFecha);
         TextView puntaje = (TextView) convertView.findViewById(R.id.lblPuntaje);
 
         //voy seteando el contenido de cada uno
-        titulo.setText(task.getmTitulo().getText());
-        estado.setText(task.getmEstado().getText());
-        materia.setText(task.getmMateria().getText());
-        fecha.setText(task.getmFecha().getText());
-        puntaje.setText(task.getmPuntaje().getText());
+        titulo.setText(datos[0]);
+        materia.setText(datos[1]);
+        estado.setText("");
+        fecha.setText(datos[3]);
+        puntaje.setText("");
+        final String id = datos[4];
+
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                Intent intent = new Intent(getContext(), NewsActivity.class);
+                intent.putExtra("NewsID", id);
+                intent.putExtra("Titulo", title);
+                getContext().startActivity(intent);
+                */
+                System.out.println(id);
+            }
+        });
+
+
         // Return the completed view to render on screen
         return convertView;
     }

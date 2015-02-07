@@ -66,7 +66,6 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
 
         try {
             courses=new DataBaseManagerCourses(this);
-            //courses.insertar("12","INTERACCION HOMBRE MAQUINA","Guido");
             Cursor c = courses.consultar();
             if (c.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
