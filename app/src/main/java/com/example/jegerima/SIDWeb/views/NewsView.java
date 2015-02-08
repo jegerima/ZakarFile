@@ -57,7 +57,7 @@ public class NewsView extends FrameLayout {
         mContenido = (TextView)mHeader.findViewById(R.id.lblContenido);
         mFecha = (TextView)mHeader.findViewById(R.id.lblFecha);
         mNMensajes = (TextView)mHeader.findViewById(R.id.lblNMensajes);
-        mImagen = (ImageView)mHeader.findViewById(R.id.imgAnuncio);
+        //mImagen = (ImageView)mHeader.findViewById(R.id.imgAnuncio);
     }
 
     public void setParams(String titulo, String materia, String contenido, String fecha, int mensajes){

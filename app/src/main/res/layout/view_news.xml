@@ -26,15 +26,17 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.80">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
 
                     <TextView
                         android:id="@+id/lblTitulo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:gravity="center"
                         android:singleLine="true"
                         android:ellipsize="marquee"
@@ -45,19 +47,6 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.20">
-
-                    <ImageView
-                        android:id="@+id/imgAnuncio"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_sw_news"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
 
@@ -71,6 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold|italic"
                 android:padding="2dp"
                 android:gravity="right"
                 android:text="Presencia Mental"/>

@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.jegerima.SIDWeb.NewsActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,23 +23,14 @@
                 <TextView
                         android:id="@+id/lblTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="6dp"
                         android:layout_alignParentLeft="true"
                         android:gravity="center"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:text="Asistencia Jueves 29 de Enero"/>
-
-                <ImageView
-                        android:id="@+id/imgAnuncio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_sw_news"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
 
             </LinearLayout>
 
@@ -48,6 +43,7 @@
                 android:paddingRight="2dp"
                 android:paddingBottom="7dp"
                 android:paddingTop="2dp"
+                android:textStyle="bold|italic"
                 android:gravity="right"
                 android:text="Presencia Mental"/>
 
@@ -73,7 +69,7 @@ GLAE"
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:paddingTop="4dp"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -111,5 +107,6 @@ GLAE"
             </LinearLayout>
 
     </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -33,7 +33,7 @@
                     <TextView
                         android:id="@+id/lblTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:gravity="center"
                         android:textSize="15sp"
@@ -76,7 +76,7 @@
                         android:layout_alignParentLeft="true"
                         android:padding="2dp"
                         android:gravity="left"
-                        android:text="A entregar"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -124,15 +124,28 @@
                     android:layout_weight="0.60"
                     android:padding="0dp">
 
-                    <TextView
-                        android:id="@+id/lblFecha"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:paddingLeft="2dp"
-                        android:textColor="#888888"
-                        android:text="Feb 2 en 11:55 PM"/>
+                        android:layout_height="match_parent">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="2dp"
+                            android:text="Entrega:"
+                            android:textColor="#22FF44"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/lblFecha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:paddingLeft="2dp"
+                            android:textColor="#888888"
+                            android:text="Feb 2 en 11:55 PM"/>
+
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -162,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="2dp"
-                        android:text="Fecha Tope:"
+                        android:text="Tope:"
                         android:textColor="#FF2244"
                         android:textStyle="bold"/>
 
