@@ -1,12 +1,15 @@
 package com.example.jegerima.SIDWeb.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jegerima.SIDWeb.NewsActivity;
 import com.example.jegerima.SIDWeb.R;
+import com.example.jegerima.SIDWeb.TaskActivity;
 import com.example.jegerima.SIDWeb.views.TaskView;
 
 import java.util.ArrayList;
@@ -38,25 +41,27 @@ public class SWTaskAdapter extends SWAdapter{
         TextView fecha = (TextView) convertView.findViewById(R.id.lblFecha);
         TextView puntaje = (TextView) convertView.findViewById(R.id.lblPuntaje);
 
+        //0 id_task; 1 id_course; 2 course_name; 3 task_title; 4 task_description; 5 desde; 6 hasta; 7 tope
+        //TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
         //voy seteando el contenido de cada uno
-        titulo.setText(datos[0]);
-        materia.setText(datos[1]);
+        titulo.setText(datos[1]);
+        materia.setText(datos[2]);
         estado.setText("");
-        fecha.setText(datos[3]);
+        fecha.setText(datos[4]);
         puntaje.setText("");
-        final String id = datos[4];
 
+        final String id_task = datos[0];
+        final String title_task=datos[1];
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Intent intent = new Intent(getContext(), NewsActivity.class);
-                intent.putExtra("NewsID", id);
-                intent.putExtra("Titulo", title);
+
+                Intent intent = new Intent(getContext(), TaskActivity.class);
+                intent.putExtra("NewsID", id_task);
+                intent.putExtra("Titulo", title_task);
                 getContext().startActivity(intent);
-                */
-                System.out.println(id);
+                System.out.println("TaskID: "+id_task);
             }
         });
 

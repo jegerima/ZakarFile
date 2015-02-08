@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -32,26 +33,19 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class LoginActivity extends Activity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+
     private UserLoginTask mAuthTask = null;
     private int userId=0;
     private Activity act=this;
 
     // UI references.
-
     public static final String MyPREFERENCES = "SIDWebPrefs" ;
     SharedPreferences sharedpreferences;
 
@@ -117,9 +111,6 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-
-
-
     }
 
     @Override
@@ -142,12 +133,6 @@ public class LoginActivity extends Activity {
         }
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     public void attemptLogin() {
         Toast o= Toast.makeText(getApplicationContext(), log_bool, Toast.LENGTH_SHORT);
         //o.show();
@@ -331,11 +316,18 @@ public class LoginActivity extends Activity {
                             "join enrollment_terms er on c.enrollment_term_id=er.id " +
                             "where u.id=&PV_USER&);";
         //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)
-        String q_task= "select a.id, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso " +
+        /*String q_task= "select a.id, c.id, c.name, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso " +
                             "from assignments a " +
                             "left join submissions s on a.id=s.assignment_id " +
                             "where context_id=16144 and submission_types not like '%quiz%';";
-
+        */
+                            //"select a.id, c.id, c.name, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
+        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,COALESCE(unlock_at,'1901-01-01 11:22:33') hasta,COALESCE(lock_at,'1901-01-01 11:22:33') atraso "+
+                            "from assignments a "+
+                            "left join submissions s on a.id=s.assignment_id "+
+                            "left join courses c on a.context_id=c.id "+
+                            "left join enrollments e on e.course_id=c.id "+
+                            "where e.user_id=&PV_USER& and submission_types not like '%quiz%';";
 
         String q_user=      "select user_id "+
                             "from pseudonyms "+
@@ -374,13 +366,17 @@ public class LoginActivity extends Activity {
                     news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6),rs.getString(7));
                 }
 
-                rs=con.consulta(q_task);
+                rs=con.consulta(q_task.replace("&PV_USER&", userId + ""));
                 DataBaseManagerTask tasks;
                 tasks=new DataBaseManagerTask(this);
 
                 while (rs.next()){
+                    System.out.println("NextTask: "+rs.getString(1));
                     //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)
-                    tasks.insertar(rs.getString(1),"16144","Ing software II",rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),rs.getDate(6));
+                    //tasks.insertar(rs.getString(1),"16144","Ing software II",rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),rs.getDate(6));
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date date = df.parse("2013-10-18 13:59:00");
+                    tasks.insertar(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), date,date,date);
                 }
                 rs.close();
                 rs=null;

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.postgresql.core.Query;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,25 +60,28 @@ public class DataBaseManagerTask {
 
         return valores;
     }
-    public void insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso){
+    public void insertar(String id,String id_curso,String nombre_curso,String titulo,String descripcion,Date desde,Date hasta,Date atraso){
         //insert  into contactos
-        db.insert(TABLE_NAME,null,generarContentValues(id,id_curso,nombre_curso,tiulo,descripcion,desde,hasta,atraso));
+        db.insert(TABLE_NAME,null,generarContentValues(id,id_curso,nombre_curso,titulo,descripcion,desde,hasta,atraso));
     }
 
 
     public Cursor consultar(){
         //insert  into contactos
 
-        String[] campos = new String[] {TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
-        return db.query(TABLE_NAME, campos, null, null, null, null, null);
+        System.out.println(TABLE_NAME + " " + TITLE);
+        Cursor sc = db.query(TABLE_NAME, campos, null, null, null, null, null);
+        System.out.println("Query Listo: "+sc.toString());
+        return sc;
     }
 
     public Cursor consultar(String id){
         //insert  into contactos
 
-        String[] campos = new String[] {TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        String[] campos = new String[] { TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
         String[] args = new String[] {id};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 

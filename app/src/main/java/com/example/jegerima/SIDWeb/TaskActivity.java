@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
 
 
 public class TaskActivity extends ActionBarActivity {
@@ -33,6 +34,7 @@ public class TaskActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         this.TareaID = intent.getStringExtra("NewsID");
+        System.out.println("IDTask obtenido: "+TareaID);
         Toast.makeText(this, this.TareaID, Toast.LENGTH_SHORT);
         initData(TareaID);
     }
@@ -64,15 +66,26 @@ public class TaskActivity extends ActionBarActivity {
     {
         TextView titulo = (TextView) findViewById(R.id.lblTitulo);
         TextView materia = (TextView) findViewById(R.id.lblMateria);
-        TextView contenido = (TextView) findViewById(R.id.lblContenido);
+        TextView contenido = (TextView) findViewById(R.id.txtContent);
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
-        TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
+        TextView puntaje = (TextView) findViewById(R.id.lblPuntaje);
 
-        DataBaseManagerAnnouncements dbNews=null;
+        DataBaseManagerTask dbNews=null;
+
         try
         {
-            dbNews = new DataBaseManagerAnnouncements(this);
-            Cursor dato = dbNews.consultar();
+            System.out.println("Extrayendo tarea...");
+            dbNews = new DataBaseManagerTask(this);
+            Cursor dato = dbNews.consultar(TareaID);
+            if (dato.moveToFirst()) {
+                //TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
+                titulo.setText(dato.getString(0));
+                materia.setText(dato.getString(1));
+                contenido.setText(Html.fromHtml(dato.getString(2)));
+                fecha.setText(dato.getString(3));
+                puntaje.setText("10 de 10 puntos");
+                System.out.println("Done");
+            }
         }catch (Exception e)
         {
             System.out.println(e.toString());

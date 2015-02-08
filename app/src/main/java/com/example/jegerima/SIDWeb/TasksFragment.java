@@ -1,10 +1,20 @@
 package com.example.jegerima.SIDWeb;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.jegerima.SIDWeb.adapters.SWEffects;
+import com.example.jegerima.SIDWeb.adapters.SWNewsAdapter;
+import com.example.jegerima.SIDWeb.adapters.SWTaskAdapter;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Jegerima on 25/01/2015.
@@ -12,12 +22,57 @@ import android.view.ViewGroup;
 public class TasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        SWTaskAdapter dataAdapter;
+
         // Inflate the layout for this fragment
 
         //ListAdapter la = new ArrayAdapter<String>();
+        View V = inflater.inflate(R.layout.fragment_tasks, container, false);
+        final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_tasks);
+        //ArrayList<NewsView> list=new ArrayList<NewsView>();
+        ArrayList<String[]> list=new ArrayList<String[]>();
 
-        return inflater.inflate(R.layout.fragment_tasks, container, false);
+        DataBaseManagerTask dbTasks=null;
+        try {
+            dbTasks = new DataBaseManagerTask(this.getActivity());
 
+            Cursor datos = dbTasks.consultar();
+            if (datos.moveToFirst()) {
+
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
+                    //NewsView nv= new NewsView(this.getActivity());
+                    //nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
+                    //0 id_task; 1 id_course; 2 course_name; 3 task_title; 4 task_description; 5 desde; 6 hasta; 7 tope
+                    //TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
+                    list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5), datos.getString(6)});
+
+                } while(datos.moveToNext());
+            }
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }finally {
+            if(dbTasks!=null)
+                dbTasks.close();
+        }
+
+        //agrego el adaptador a mi ListView
+        dataAdapter = new SWTaskAdapter(this.getActivity(), list);
+        ll.setAdapter(dataAdapter);
+
+        //agrego el efecto deseado
+        SWEffects.animation(ll, dataAdapter, 0, -1, 1, 0);//4 enteros del final son los efectos
+        //primero 1 efecto bottom
+        //segundo 1 para left -1 para right
+        //tercero 1 para efecto alpha
+        //cuarto 1 para efecto scale
+        //SWEffects.Swipe(ll,dataAdapter);
+        //SWEffects.SwipeUndoAnimacion(getActivity(), ll, dataAdapter,true,0,0,0,1);//el cuarto parametro es booleano y es para indicar si se desea auto desaparicion del undo
+
+        //return inflater.inflate(R.layout.fragment_tasks, container, false);
+        return V;
 
     }
 }
