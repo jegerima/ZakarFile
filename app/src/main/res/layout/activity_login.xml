@@ -38,6 +38,10 @@
         android:background="#FFFFFF"
         android:layout_gravity="center">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout android:id="@+id/user_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,6 +106,9 @@
                 android:textStyle="bold"/>
 
         </LinearLayout>
+    </ScrollView>
+
+
     </RelativeLayout>
 </LinearLayout>
 
