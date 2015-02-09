@@ -28,7 +28,7 @@ public class SWTaskAdapter extends SWAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        String[] datos=(String[])getItem(position);
+        final String[] datos=(String[])getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_personal_tasks, parent, false);
@@ -56,7 +56,7 @@ public class SWTaskAdapter extends SWAdapter{
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.out.println(datos[0]+" "+datos[1]+" "+datos[2]+" "+datos[3]+" "+datos[4]+" "+datos[5]+" "+datos[6]);
                 Intent intent = new Intent(getContext(), TaskActivity.class);
                 intent.putExtra("NewsID", id_task);
                 intent.putExtra("Titulo", title_task);

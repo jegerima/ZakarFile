@@ -73,8 +73,8 @@ public class DataBaseManagerTask {
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
         System.out.println(TABLE_NAME + " " + TITLE);
-        Cursor sc = db.query(TABLE_NAME, campos, null, null, null, null, null);
-        System.out.println("Query Listo: "+sc.toString());
+        Cursor sc = db.query(TABLE_NAME, campos, null, null, null, null, STAR_DATE+" desc");
+        System.out.println("Query Listo: " + sc.toString());
         return sc;
     }
 
