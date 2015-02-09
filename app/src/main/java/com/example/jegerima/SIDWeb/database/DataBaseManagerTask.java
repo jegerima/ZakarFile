@@ -32,15 +32,15 @@ public class DataBaseManagerTask {
     private SQLiteDatabase db;
 
     public static final String CREATE_TABLE = "create table "+TABLE_NAME+" ("
-            + TASK_ID + " integer primary key autoincrement,"
+            + TASK_ID + " integer primary key,"
             + ID_COURSE + " text not null,"
             + COURSE_NAME + " text not null,"
             + TITLE + " text,"
             + DESCRIPTION + " text,"
             + STAR_DATE +" TIMESTAMP NOT NULL,"
             + FINAL_DATE +" TIMESTAMP NOT NULL,"
-            + DEAD_LINE +" TIMESTAMP NULL)";
-            //+ " FOREIGN KEY("+ID_COURSE+") REFERENCES "+TABLE_FK+"("+FK_ID+"));";
+            + DEAD_LINE +" TIMESTAMP NULL,"
+            + " FOREIGN KEY("+ID_COURSE+") REFERENCES "+TABLE_FK+"("+FK_ID+"));";
 
     public DataBaseManagerTask(Context contexto) {
         helper = new DbHelper(contexto);
