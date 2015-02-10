@@ -31,6 +31,7 @@ import com.example.jegerima.SIDWeb.adapters.SWMenuAdapter;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerNotes;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
 import com.example.jegerima.SIDWeb.database.MyConnection;
 
 import java.io.File;
@@ -200,6 +201,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         notes.vaciar();
         DataBaseManagerAnnouncements news= new DataBaseManagerAnnouncements(this);
         news.vaciar();
+        DataBaseManagerTask task= new DataBaseManagerTask(this);
+        task.vaciar();
         DataBaseManagerCourses courses= new DataBaseManagerCourses(this);
         courses.vaciar();
 

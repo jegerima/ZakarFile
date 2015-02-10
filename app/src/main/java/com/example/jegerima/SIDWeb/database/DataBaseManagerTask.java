@@ -66,19 +66,19 @@ public class DataBaseManagerTask {
     }
 
 
-    public Cursor consultar(){
+    public Cursor consultar(String id){
         //insert  into contactos
 
         String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
 
-        System.out.println(TABLE_NAME + " " + TITLE);
-        Cursor sc = db.query(TABLE_NAME, campos, null, null, null, null, STAR_DATE+" desc");
-        System.out.println("Query Listo: " + sc.toString());
-        return sc;
+        String[] args = new String[] {id};
+
+        if(id==null)return db.query(TABLE_NAME, campos, null, null, null, null, STAR_DATE+" desc");
+        return db.query(TABLE_NAME, campos, ID_COURSE+"=?", args, null, null, STAR_DATE+" desc");
     }
 
-    public Cursor consultar(String id){
+    public Cursor consultar_tarea(String id){
         //insert  into contactos
 
         String[] campos = new String[] { TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};

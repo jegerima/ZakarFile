@@ -80,7 +80,7 @@ public class TaskActivity extends ActionBarActivity {
         {
             System.out.println("Extrayendo tarea...");
             dbNews = new DataBaseManagerTask(this);
-            Cursor dato = dbNews.consultar(TareaID);
+            Cursor dato = dbNews.consultar_tarea(TareaID);
             if (dato.moveToFirst()) {
                 //TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
                 titulo.setText(dato.getString(0));

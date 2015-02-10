@@ -43,6 +43,7 @@ public class FragmentTabContainer extends Fragment {
         mTabHost = (FragmentTabHost)mRootView.findViewById(android.R.id.tabhost);
         mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.realtabcontent);
 
+
         switch(SECTION_NUMBER){
             case 1: //Inicio
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentA").setIndicator("Anuncios"), NewsFragment.class, null);
@@ -50,10 +51,15 @@ public class FragmentTabContainer extends Fragment {
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentC").setIndicator("Apuntes"), PersonalTaskFragment.class, null);
                 break;
             case 2: //Cursos
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), NewsFragment.class, null);
-                System.out.println(bd.getInt("course_id"));
+
+                Bundle bargs = new Bundle();
+                bargs = new Bundle();
+                bargs.putString("course_id",bd.getInt("course_id")+"");
+
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, bargs);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, bargs);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), NewsFragment.class,bargs );
+                //System.out.println(bd.getInt("course_id"));
                 break;
             case 3: //Tareas
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, null);

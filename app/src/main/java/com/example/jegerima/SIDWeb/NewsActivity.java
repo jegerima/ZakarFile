@@ -76,7 +76,7 @@ public class NewsActivity extends ActionBarActivity {
         try {
 
             dbNews = new DataBaseManagerAnnouncements(this);
-            Cursor datos = dbNews.consultar(AnuncioID);
+            Cursor datos = dbNews.consultar_anuncio(AnuncioID);
             if (datos.moveToFirst()) {
                 titulo.setText(datos.getString(0));
                 materia.setText(datos.getString(1));

@@ -23,8 +23,13 @@ public class TasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SWTaskAdapter dataAdapter;
+        String id_course=null;
 
         // Inflate the layout for this fragment
+
+        Bundle bd = getArguments();
+        if(bd!=null)
+            id_course=bd.getString("course_id");
 
         //ListAdapter la = new ArrayAdapter<String>();
         View V = inflater.inflate(R.layout.fragment_tasks, container, false);
@@ -36,16 +41,12 @@ public class TasksFragment extends Fragment {
         try {
             dbTasks = new DataBaseManagerTask(this.getActivity());
 
-            Cursor datos = dbTasks.consultar();
+            Cursor datos = dbTasks.consultar(id_course);
             if (datos.moveToFirst()) {
 
                 //Recorremos el cursor hasta que no haya más registros
                 do {
                     //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
-                    //NewsView nv= new NewsView(this.getActivity());
-                    //nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
-                    //0 id_task; 1 id_course; 2 course_name; 3 task_title; 4 task_description; 5 desde; 6 hasta; 7 tope
-                    //TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
                     list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5), datos.getString(6)});
 
                 } while(datos.moveToNext());
