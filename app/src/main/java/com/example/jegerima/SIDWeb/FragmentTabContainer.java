@@ -1,5 +1,6 @@
 package com.example.jegerima.SIDWeb;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class FragmentTabContainer extends Fragment {
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, null);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, null);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), NewsFragment.class, null);
+                System.out.println(bd.getInt("course_id"));
                 break;
             case 3: //Tareas
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, null);

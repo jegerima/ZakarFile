@@ -43,10 +43,6 @@ public class NewsFragment extends Fragment {
 
                 //Recorremos el cursor hasta que no haya más registros
                 do {
-                    //y voy creando nuevos anuncios para luego irlos añadiendo a la lista
-                    //NewsView nv= new NewsView(this.getActivity());
-                    //nv.setParams(datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),Integer.parseInt(datos.getString(4)));
-
                     list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5)});
                 } while(datos.moveToNext());
             }

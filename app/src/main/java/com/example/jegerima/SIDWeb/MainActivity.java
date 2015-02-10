@@ -108,6 +108,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
             //Default sera usado para las Materias
             default:
+                FragmentTabCursos.getArguments().putInt("course_id",-position);
                 transaction.replace(R.id.container, FragmentTabCursos);
                 break;
         }
