@@ -23,6 +23,7 @@ public class DataBaseManagerTask {
     public static final  String STAR_DATE = "star_date";
     public static final  String FINAL_DATE = "final_date";
     public static final  String DEAD_LINE = "deadline";
+    public static final  String SUBMITTED = "submitted";
 
     //Para FK
     public static final  String TABLE_FK="courses";
@@ -40,13 +41,15 @@ public class DataBaseManagerTask {
             + STAR_DATE +" TIMESTAMP NOT NULL,"
             + FINAL_DATE +" TIMESTAMP NOT NULL,"
             + DEAD_LINE +" TIMESTAMP NULL,"
+            + SUBMITTED + " TIMESTAMP NULL,"
+
             + " FOREIGN KEY("+ID_COURSE+") REFERENCES "+TABLE_FK+"("+FK_ID+"));";
 
     public DataBaseManagerTask(Context contexto) {
         helper = new DbHelper(contexto);
         db = helper.getWritableDatabase();
     }
-    public ContentValues generarContentValues(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso){
+    public ContentValues generarContentValues(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso,Date submitted){
         ContentValues valores = new ContentValues();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         valores.put(TASK_ID,id);
@@ -57,12 +60,13 @@ public class DataBaseManagerTask {
         valores.put(STAR_DATE,dateFormat.format(desde));
         valores.put(FINAL_DATE,dateFormat.format(hasta));
         valores.put(DEAD_LINE,dateFormat.format(atraso));
+        if(submitted!=null)valores.put(SUBMITTED,dateFormat.format(submitted));
 
         return valores;
     }
-    public void insertar(String id,String id_curso,String nombre_curso,String titulo,String descripcion,Date desde,Date hasta,Date atraso){
+    public void insertar(String id,String id_curso,String nombre_curso,String titulo,String descripcion,Date desde,Date hasta,Date atraso,Date submitted){
         //insert  into contactos
-        db.insert(TABLE_NAME,null,generarContentValues(id,id_curso,nombre_curso,titulo,descripcion,desde,hasta,atraso));
+        db.insert(TABLE_NAME,null,generarContentValues(id,id_curso,nombre_curso,titulo,descripcion,desde,hasta,atraso,submitted));
     }
 
 
@@ -77,6 +81,22 @@ public class DataBaseManagerTask {
         if(id==null)return db.query(TABLE_NAME, campos, null, null, null, null, STAR_DATE+" desc");
         return db.query(TABLE_NAME, campos, ID_COURSE+"=?", args, null, null, STAR_DATE+" desc");
     }
+    public Cursor consultarAEntregar(){
+        String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
+        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NULL", null, null, null, STAR_DATE+" desc");
+    }
+    public Cursor consultarAtrasadas(){
+        String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
+        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NOT NULL", null, null, null, STAR_DATE+" desc");
+    }
+    public Cursor consultarEntregadas(){
+        String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
+        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NOT NULL", null, null, null, STAR_DATE+" desc");
+    }
+
 
     public Cursor consultar_tarea(String id){
         //insert  into contactos

@@ -36,6 +36,7 @@ public class FragmentTabContainer extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle bd = getArguments();
+        Bundle bargs = new Bundle();
         SECTION_NUMBER = bd.getInt("section_number");
         System.out.println("Valor del bundle basico = " + SECTION_NUMBER);
 
@@ -52,9 +53,9 @@ public class FragmentTabContainer extends Fragment {
                 break;
             case 2: //Cursos
 
-                Bundle bargs = new Bundle();
-                bargs = new Bundle();
+
                 bargs.putString("course_id",bd.getInt("course_id")+"");
+                bargs.putString("tipo_busqueda","por_curso");
 
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, bargs);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, bargs);
@@ -62,9 +63,13 @@ public class FragmentTabContainer extends Fragment {
                 //System.out.println(bd.getInt("course_id"));
                 break;
             case 3: //Tareas
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentH").setIndicator("Atrasadas"), TasksFragment.class, null);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentI").setIndicator("Entregadas"), TasksFragment.class, null);
+
+                bargs.putString("tipo_busqueda","por_tareas_a_entregar");
+                bargs.putString("tipo_busqueda","por_tareas_atrasadas");
+                bargs.putString("tipo_busqueda","por_tareas_entregadas");
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, bargs);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentH").setIndicator("Atrasadas"), TasksFragment.class, bargs);
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentI").setIndicator("Entregadas"), TasksFragment.class, bargs);
                 break;
         }
         return mRootView;

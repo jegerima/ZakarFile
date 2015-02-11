@@ -20,28 +20,54 @@ import java.util.ArrayList;
  * Created by Jegerima on 25/01/2015.
  */
 public class TasksFragment extends Fragment {
+    Cursor datos;
+    String id_course=null,tipoBusqueda="";
+    ArrayList<String[]> list=new ArrayList<String[]>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SWTaskAdapter dataAdapter;
-        String id_course=null;
+        Bundle bd = getArguments();
 
         // Inflate the layout for this fragment
 
-        Bundle bd = getArguments();
-        if(bd!=null)
+
+        if(bd!=null){
             id_course=bd.getString("course_id");
+            tipoBusqueda=bd.getString("tipo_busqueda");
+        }
+
 
         //ListAdapter la = new ArrayAdapter<String>();
         View V = inflater.inflate(R.layout.fragment_tasks, container, false);
         final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_tasks);
         //ArrayList<NewsView> list=new ArrayList<NewsView>();
-        ArrayList<String[]> list=new ArrayList<String[]>();
+
 
         DataBaseManagerTask dbTasks=null;
         try {
             dbTasks = new DataBaseManagerTask(this.getActivity());
+            //Consulta la base dependiendo el tipo de busqueda
+            switch (tipoBusqueda){
+                case "por_curso":
+                    datos = dbTasks.consultar(id_course);
+                    break;
+                case "por_tareas_a_entregar":
+                    System.out.println("ENTRA//////////////////");
+                    datos = dbTasks.consultarAEntregar();
+                    break;
+                case "por_tareas_atrasadas":
+                    datos = dbTasks.consultarAtrasadas();
+                    break;
+                case "por_tareas_entregadas":
+                    datos = dbTasks.consultarEntregadas();
+                    break;
+                default:
+                    datos = dbTasks.consultar(id_course);
+                    break;
+            }
 
-            Cursor datos = dbTasks.consultar(id_course);
+
+
             if (datos.moveToFirst()) {
 
                 //Recorremos el cursor hasta que no haya más registros
@@ -76,4 +102,5 @@ public class TasksFragment extends Fragment {
         return V;
 
     }
+
 }
