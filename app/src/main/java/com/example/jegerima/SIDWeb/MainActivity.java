@@ -109,12 +109,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
             //Default sera usado para las Materias
             default:
+                if(FragmentTabCursos!=null){
+                    FragmentTabCursos.onDestroyView();
+                    initFragmentTabCursos();
+                }
                 FragmentTabCursos.getArguments().putInt("course_id",-position);
                 transaction.replace(R.id.container, FragmentTabCursos);
+
                 break;
         }
         onSectionAttached(position + 1);
-        //transaction.addToBackStack(null);
         transaction.commit();
         Toast.makeText(this, mTitle + " " + position, Toast.LENGTH_SHORT).show();
     }
@@ -230,7 +234,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private void initFragmentTabCursos() {
         FragmentTabCursos = new FragmentTabContainer();
         Bundle bargs = new Bundle();
-        bargs = new Bundle();
         bargs.putInt("section_number", 2);
         FragmentTabCursos.setArguments(bargs);
     }
@@ -238,7 +241,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private void initFragmentTabTareas() {
         FragmentTabTareas = new FragmentTabContainer();
         Bundle bargs = new Bundle();
-        bargs = new Bundle();
         bargs.putInt("section_number", 3);
         FragmentTabTareas.setArguments(bargs);
     }

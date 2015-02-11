@@ -53,6 +53,10 @@ public class SWTaskAdapter extends SWAdapter{
         final String id_task = datos[0];
         final String title_task=datos[1];
 
+        if(datos.length==8)
+            if(datos[7].equalsIgnoreCase("notes"))
+                return convertView;
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

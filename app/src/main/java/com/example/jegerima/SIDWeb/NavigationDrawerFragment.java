@@ -135,6 +135,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                     //se recibe el codigo de la materia o de opcion del menu
                     codigo=Integer.parseInt(cod);
+                    
                     selectItem(position);
 
                 }

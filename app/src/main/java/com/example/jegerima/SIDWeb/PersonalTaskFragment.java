@@ -38,7 +38,7 @@ public class PersonalTaskFragment extends Fragment {
             if (datos.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
-                    list.add(new String []{datos.getString(0),datos.getString(1),datos.getString(2),datos.getString(3),datos.getString(4)});
+                    list.add(new String []{datos.getString(0),datos.getString(1),datos.getString(2),datos.getString(3),datos.getString(4),null,null,"notes"});
                 } while(datos.moveToNext());
             }
 
