@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -73,6 +74,8 @@ public class TaskActivity extends ActionBarActivity {
         TextView contenido = (TextView) findViewById(R.id.txtContent);
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView puntaje = (TextView) findViewById(R.id.lblPuntaje);
+        contenido.setMovementMethod(LinkMovementMethod.getInstance());
+
 
         DataBaseManagerTask dbNews=null;
 
