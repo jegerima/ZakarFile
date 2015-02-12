@@ -72,6 +72,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mUserLearnedDrawer;
     private int codigo=0;
     private int n_materias;
+    public String name="SIDWeb";
 
     public NavigationDrawerFragment() {
     }
@@ -128,8 +129,11 @@ public class NavigationDrawerFragment extends Fragment {
                 else {
                     String cod=((TextView)mDrawerListView.getChildAt(position).findViewById(R.id.id)).getText().toString();
                     //al seleccionar una opcion que no sea cursos o alguna materia se manda señal para ocultar la vista de las materias
-                    if(position>1 && position<2+n_materias)
+                    if(position>1 && position<2+n_materias){
                         SWMenuAdapter.OPEN=View.VISIBLE;
+                        name=((TextView)mDrawerListView.getChildAt(position).findViewById(R.id.title)).getText().toString();
+
+                    }
                     else
                         SWMenuAdapter.OPEN=View.GONE;
 
@@ -151,7 +155,7 @@ public class NavigationDrawerFragment extends Fragment {
         list.add(new String[]{"Tareas","2"});
         list.add(new String[]{"Horario","3"});
         list.add(new String[]{"Salir", "4"});
-        SWMenuAdapter swm= new SWMenuAdapter(getActionBar().getThemedContext(),list);
+        SWMenuAdapter swm= new SWMenuAdapter(getActivity(),list);
         //SWEffects.animation(mDrawerListView,swm,1,0,0,0);
         mDrawerListView.setAdapter(swm);
         /*

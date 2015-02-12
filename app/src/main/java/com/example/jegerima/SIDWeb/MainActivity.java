@@ -113,7 +113,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                     FragmentTabCursos.onDestroyView();
                     initFragmentTabCursos();
                 }
-                FragmentTabCursos.getArguments().putInt("course_id",-position);
+                FragmentTabCursos.getArguments().putInt("course_id", -position);
                 transaction.replace(R.id.container, FragmentTabCursos);
 
                 break;
@@ -139,6 +139,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 break;
             case 5:
                 mTitle = getString(R.string.title_section5);
+                break;
+            default:
+                mTitle=mNavigationDrawerFragment.name;
                 break;
         }
     }
