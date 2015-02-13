@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ public class NewsActivity extends ActionBarActivity {
         TextView contenido = (TextView) findViewById(R.id.lblContenido);
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
-
+        contenido.setMovementMethod(LinkMovementMethod.getInstance());
         DataBaseManagerAnnouncements dbNews=null;
         try {
 

@@ -64,11 +64,14 @@ public class FragmentTabContainer extends Fragment {
                 break;
             case 3: //Tareas
 
+                bargs=new Bundle();
                 bargs.putString("tipo_busqueda","por_tareas_a_entregar");
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class,bargs );
+                bargs=new Bundle();
                 bargs.putString("tipo_busqueda","por_tareas_atrasadas");
-                bargs.putString("tipo_busqueda","por_tareas_entregadas");
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentG").setIndicator("A entregar"), TasksFragment.class, bargs);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentH").setIndicator("Atrasadas"), TasksFragment.class, bargs);
+                bargs=new Bundle();
+                bargs.putString("tipo_busqueda","por_tareas_entregadas");
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentI").setIndicator("Entregadas"), TasksFragment.class, bargs);
                 break;
         }

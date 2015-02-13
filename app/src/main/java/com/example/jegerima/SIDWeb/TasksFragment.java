@@ -22,11 +22,12 @@ import java.util.ArrayList;
 public class TasksFragment extends Fragment {
     Cursor datos;
     String id_course=null,tipoBusqueda="";
-    ArrayList<String[]> list=new ArrayList<String[]>();
+    ArrayList<String[]> list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SWTaskAdapter dataAdapter;
         Bundle bd = getArguments();
+        list=new ArrayList<String[]>();
 
         // Inflate the layout for this fragment
 
@@ -56,9 +57,12 @@ public class TasksFragment extends Fragment {
                     datos = dbTasks.consultarAEntregar();
                     break;
                 case "por_tareas_atrasadas":
+                    System.out.println("ENTRA ATRASADAS//////////////////");
                     datos = dbTasks.consultarAtrasadas();
                     break;
                 case "por_tareas_entregadas":
+                    System.out.println("ENTRA ENTREGADAS//////////////////");
+
                     datos = dbTasks.consultarEntregadas();
                     break;
                 default:

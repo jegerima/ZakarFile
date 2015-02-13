@@ -39,7 +39,7 @@ public class DataBaseManagerTask {
             + TITLE + " text,"
             + DESCRIPTION + " text,"
             + STAR_DATE +" TIMESTAMP NOT NULL,"
-            + FINAL_DATE +" TIMESTAMP NOT NULL,"
+            + FINAL_DATE +" TIMESTAMP NULL,"
             + DEAD_LINE +" TIMESTAMP NULL,"
             + SUBMITTED + " TIMESTAMP NULL,"
 
@@ -58,8 +58,8 @@ public class DataBaseManagerTask {
         valores.put(TITLE,tiulo);
         valores.put(DESCRIPTION,descripcion);
         valores.put(STAR_DATE,dateFormat.format(desde));
-        valores.put(FINAL_DATE,dateFormat.format(hasta));
-        valores.put(DEAD_LINE,dateFormat.format(atraso));
+        if(hasta!=null)valores.put(FINAL_DATE,dateFormat.format(hasta));
+        if(atraso!=null)valores.put(DEAD_LINE,dateFormat.format(atraso));
         if(submitted!=null)valores.put(SUBMITTED,dateFormat.format(submitted));
 
         return valores;
@@ -83,13 +83,19 @@ public class DataBaseManagerTask {
     }
     public Cursor consultarAEntregar(){
         String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        Date d=new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String[] args = new String[] {dateFormat.format(d)};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NULL", null, null, null, STAR_DATE+" desc");
+        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NULL and (final_date>? or final_date is null) ", args, null, null, STAR_DATE+" desc");
     }
     public Cursor consultarAtrasadas(){
         String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};
+        Date d=new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String[] args = new String[] {dateFormat.format(d)};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NOT NULL", null, null, null, STAR_DATE+" desc");
+        return db.query(TABLE_NAME, campos, SUBMITTED+" IS NULL and final_date<? ", args, null, null, STAR_DATE+" desc");
     }
     public Cursor consultarEntregadas(){
         String[] campos = new String[] {TASK_ID, TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE};

@@ -322,7 +322,7 @@ public class LoginActivity extends Activity {
                             "where context_id=16144 and submission_types not like '%quiz%';";
         */
                             //"select a.id, c.id, c.name, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
-        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,COALESCE(unlock_at,'1901-01-01 11:22:33') hasta,COALESCE(lock_at,'1901-01-01 11:22:33') atraso,max(s.submitted_at),count(a.id) "+
+        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
                             "from assignments a "+
                             "left join submissions s on a.id=s.assignment_id "+
                             "left join courses c on a.context_id=c.id "+
@@ -378,7 +378,7 @@ public class LoginActivity extends Activity {
                     //tasks.insertar(rs.getString(1),"16144","Ing software II",rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),rs.getDate(6));
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = df.parse("2013-10-18 13:59:00");
-                    tasks.insertar(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getDate(6),date,date,rs.getDate(9));
+                    tasks.insertar(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getTimestamp(6),rs.getTimestamp(7),rs.getTimestamp(8),rs.getTimestamp(9));
                 }
                 rs.close();
                 rs=null;
