@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
+import com.example.jegerima.SIDWeb.MainActivity;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
+import com.example.jegerima.SIDWeb.database.DataBaseManagerNotes;
 import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
@@ -84,6 +87,8 @@ public class SWEffects {
     //accion que se realiza luego de borrado el elemento del listview
     public static void undoAction(SWAdapter adapter ,@NonNull ViewGroup viewGroup,@NonNull int[] reverseSortedPositions){
         for (int position : reverseSortedPositions) {
+            DataBaseManagerNotes dbNotes = new DataBaseManagerNotes(adapter.getContext());
+            dbNotes.borrar(((String[])adapter.getItem(position))[0]);
             adapter.remove(adapter.getItem(position));
         }
     }

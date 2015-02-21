@@ -81,7 +81,7 @@ public class NewsActivity extends ActionBarActivity {
             if (datos.moveToFirst()) {
                 titulo.setText(datos.getString(0));
                 materia.setText(datos.getString(1));
-                contenido.setText(Html.fromHtml(datos.getString(2)));
+                contenido.setText(Html.fromHtml(datos.getString(2).replaceAll("href=\"/","href=\"https://www.sidweb.espol.edu.ec/")));
                 fecha.setText(datos.getString(3));
                 mensajes.setText(datos.getString(4));
             }

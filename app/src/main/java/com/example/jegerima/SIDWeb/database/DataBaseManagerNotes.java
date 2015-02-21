@@ -80,6 +80,10 @@ public class DataBaseManagerNotes {
         db.delete(TABLE_NAME,null,null);
     }
 
+    public void borrar(String id){
+        db.delete(TABLE_NAME,"_id=?",new String[]{id});
+    }
+
     public void close(){
         try {
             if(helper!=null){
