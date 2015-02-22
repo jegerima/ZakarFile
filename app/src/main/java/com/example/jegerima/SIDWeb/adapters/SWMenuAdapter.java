@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jegerima.SIDWeb.MainActivity;
 import com.example.jegerima.SIDWeb.R;
 
 import java.util.ArrayList;
@@ -45,8 +46,9 @@ public class SWMenuAdapter extends ArrayAdapter<String[]> {
             d="-"+d;
             convertView.findViewById(R.id.title).setVisibility(OPEN);
             ((TextView) convertView.findViewById(R.id.title)).setTextSize(12);
-            convertView.setPadding(0,0,0,0);
+            convertView.setPadding(0, 0, 0, 0);
             convertView.findViewById(R.id.title).setBackgroundColor(R.color.background_material_dark);
+            //System.out.println("contexto: "+context.getClass());
         }
 
         titulo.setText(d);
