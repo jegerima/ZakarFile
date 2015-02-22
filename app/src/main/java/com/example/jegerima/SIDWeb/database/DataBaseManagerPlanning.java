@@ -61,30 +61,28 @@ public class DataBaseManagerPlanning {
         //insert  into contactos
         db.insert(TABLE_NAME,null,generarContentValues(cap_id,cap_name,plan_id,plan_name,id_course,content_id,content_type,url));
     }
-/*
-    public Cursor consultar(String id){
+
+    public Cursor consultar_grupos(String id){
         //insert  into contactos
 
-        String[] campos = new String[] {TITLE, COURSE_NAME,CONTENT,DATE,NUM_MSG,ANNOUNCEMENTS_ID};
+        String[] campos = new String[] {CAP_ID, CAP_NAME};
         String[] args = new String[] {id};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        System.out.println("id del curso: "+id);
-        if(id==null)return db.query(TABLE_NAME, campos, null, null, null, null, null);
-        return db.query(TABLE_NAME, campos, ID_COURSE+"=?", args, null, null, null);
+        return db.query(TABLE_NAME, campos, ID_COURSE+"=?", args, CAP_ID, null, null);
     }
-*/
-/*
-    public Cursor consultar_anuncio(String id){
+
+
+    public Cursor consultar_items(String id,String grupo){
         //insert  into contactos
 
-        String[] campos = new String[] {TITLE, COURSE_NAME,CONTENT,DATE,NUM_MSG,ANNOUNCEMENTS_ID};
-        String[] args = new String[] {id};
+        String[] campos = new String[] {PLAN_ID, PLAN_TITLE,ID_COURSE,CONTENT_ID,CONTENT_TYPE,URL};
+        String[] args = new String[] {id,grupo};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
-        return db.query(TABLE_NAME, campos, ANNOUNCEMENTS_ID+"=?", args, null, null, null);
+        return db.query(TABLE_NAME, campos, ID_COURSE+"=? and "+CAP_ID+"=? ", args, null, null, null);
 
     }
 
-    */
+
 
     public void vaciar(){
         db.delete(TABLE_NAME,null,null);

@@ -59,7 +59,7 @@ public class FragmentTabContainer extends Fragment {
 
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentD").setIndicator("Anuncios"), NewsFragment.class, bargs);
                 this.mTabHost.addTab(mTabHost.newTabSpec("fragmentE").setIndicator("Tareas"), TasksFragment.class, bargs);
-                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), NewsFragment.class,bargs );
+                this.mTabHost.addTab(mTabHost.newTabSpec("fragmentF").setIndicator("Plan"), PlanningFragment.class,bargs );
                 //System.out.println(bd.getInt("course_id"));
                 break;
             case 3: //Tareas

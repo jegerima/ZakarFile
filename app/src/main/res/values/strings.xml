@@ -27,15 +27,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="deshacer">Deshacer</string>
     <string name="tarea_eliminada">Tarea Eliminada</string>
-
     <string name="title_activity_news">Anuncio</string>
     <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="title_activity_main_activity2x">MainActivity2x</string>
     <string name="title_activity_personal_task">personal_task</string>
     <string name="title_activity_activity_personal_task">activity_personal_task</string>
     <string name="title_activity_task">Tarea</string>
-
     <string name="default_example_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources><!--
   Copyright 2012 The Android Open Source Project
