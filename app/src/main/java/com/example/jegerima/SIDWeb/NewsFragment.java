@@ -34,7 +34,7 @@ public class NewsFragment extends Fragment {
             id_course=bd.getString("course_id");
         View V = inflater.inflate(R.layout.fragment_news, container, false);
         final DynamicListView ll=(DynamicListView)V.findViewById(R.id.list_news);
-        //ArrayList<NewsView> list=new ArrayList<NewsView>();
+        //ArrayList<NewsView> li|st=new ArrayList<NewsView>();
         ArrayList<String[]> list=new ArrayList<String[]>();
 
         DataBaseManagerAnnouncements dbNews=null;
