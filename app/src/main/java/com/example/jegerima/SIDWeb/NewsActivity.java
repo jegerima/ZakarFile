@@ -159,7 +159,7 @@ public class NewsActivity extends ActionBarActivity {
                 rs = con.consulta(q_comentarios.replace("$PV_ID$",AnuncioID));
                 while (rs.next()) {
                     //list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5)});
-                    //Rs devuelve: id->comentario, mensaje, id->estudiante, fecha de creado
+                    //Rs devuelve: id->comentario, mensaje, id->nombre, fecha de creado
                     listComentarios.add(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
                 }
 
@@ -208,16 +208,15 @@ public class NewsActivity extends ActionBarActivity {
             GroupItem item = new GroupItem();
             if(listComentarios.size()==0) item.title = "No hay comentarios ";
             else{
-                item.title = "Ver los "+listComentarios.size()+" comentarios";
+                item.title = "Ver ("+listComentarios.size()+") comentario(s)";
 
             }
             for(int j = 0; j < listComentarios.size(); j++) {
                 ChildItem child = new ChildItem();
-
-                child.title = "Usuario: "+listComentarios.get(j)[0];
-                System.out.println(listComentarios.get(j)[0]);
-                child.hint = listComentarios.get(j)[1];
-                System.out.println(listComentarios.get(j)[1]);
+                //0:id->comentario, 1:mensaje, 2:id->estudiante,3:fecha de creado
+                child.nombre = "Usuario: "+listComentarios.get(j)[2];
+                child.mensaje = listComentarios.get(j)[1];
+                child.publicacion = listComentarios.get(j)[3];
                 item.items.add(child);
 
             }
@@ -250,13 +249,15 @@ public class NewsActivity extends ActionBarActivity {
     }
 
     private static class ChildItem {
-        String title;
-        String hint;
+        String nombre;
+        String mensaje;
+        String publicacion;
     }
 
     private static class ChildHolder {
-        TextView title;
-        TextView hint;
+        TextView nombre;
+        TextView mensaje;
+        TextView publicaion;
     }
 
     private static class GroupHolder {
@@ -295,16 +296,18 @@ public class NewsActivity extends ActionBarActivity {
             ChildItem item = getChild(groupPosition, childPosition);
             if (convertView == null) {
                 holder = new ChildHolder();
-                convertView = inflater.inflate(R.layout.list_item, parent, false);
-                holder.title = (TextView) convertView.findViewById(R.id.textTitle);
-                holder.hint = (TextView) convertView.findViewById(R.id.textHint);
+                convertView = inflater.inflate(R.layout.comments_list_item, parent, false);
+                holder.nombre = (TextView) convertView.findViewById(R.id.usuario);
+                holder.mensaje = (TextView) convertView.findViewById(R.id.mensaje);
+                holder.publicaion = (TextView) convertView.findViewById(R.id.fecha_pub);
                 convertView.setTag(holder);
             } else {
                 holder = (ChildHolder) convertView.getTag();
             }
 
-            holder.title.setText(item.title);
-            holder.hint.setText(item.hint);
+            holder.nombre.setText(item.nombre);
+            holder.mensaje.setText(item.mensaje);
+            holder.publicaion.setText(item.publicacion);
 
             return convertView;
         }
@@ -335,7 +338,7 @@ public class NewsActivity extends ActionBarActivity {
             GroupItem item = getGroup(groupPosition);
             if (convertView == null) {
                 holder = new GroupHolder();
-                convertView = inflater.inflate(R.layout.group_item, parent, false);
+                convertView = inflater.inflate(R.layout.comments_group_item, parent, false);
                 holder.title = (TextView) convertView.findViewById(R.id.textTitle);
                 convertView.setTag(holder);
             } else {

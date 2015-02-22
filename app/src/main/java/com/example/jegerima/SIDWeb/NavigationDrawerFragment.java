@@ -118,7 +118,7 @@ public class NavigationDrawerFragment extends Fragment {
                         isVisible=false;
 
                     for(int i =0;i<n_materias;i++){
-                        //mDrawerListView.getChildAt(i+2).findViewById(R.id.title).setVisibility(vis);
+                        //mDrawerListView.getChildAt(i+2).findViewById(R.id.nombre).setVisibility(vis);
                         if(isVisible==false)
                             SWAnimation.expand(mDrawerListView.getChildAt(i + 2).findViewById(R.id.title));
                         else

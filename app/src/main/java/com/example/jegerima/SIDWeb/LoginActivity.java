@@ -307,7 +307,7 @@ public class LoginActivity extends Activity {
                             "join enrollment_terms er on c.enrollment_term_id=er.id "+
                             "where u.id=&PV_USER&;";
         //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
-        String q_anuncios=  "select dc.id,dc.context_id,c.name,dc.title,dc.message,dc.posted_at,0 "+
+        String q_anuncios=  "select dc.id,dc.context_id,c.name,dc.nombre,dc.message,dc.posted_at,0 "+
                             "from discussion_topics dc " +
                             "join courses c on (c.id=dc.context_id) "+
                             "where context_id in (select c.id " +
@@ -317,13 +317,13 @@ public class LoginActivity extends Activity {
                             "join enrollment_terms er on c.enrollment_term_id=er.id " +
                             "where u.id=&PV_USER&);";
         //insertar(String id,String id_curso,String nombre_curso,String tiulo,String descripcion,Date desde,Date hasta,Date atraso)
-        /*String q_task= "select a.id, c.id, c.name, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso " +
+        /*String q_task= "select a.id, c.id, c.name, a.nombre,a.description,due_at desde ,unlock_at hasta,lock_at atraso " +
                             "from assignments a " +
                             "left join submissions s on a.id=s.assignment_id " +
                             "where context_id=16144 and submission_types not like '%quiz%';";
         */
-                            //"select a.id, c.id, c.name, a.title,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
-        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
+                            //"select a.id, c.id, c.name, a.nombre,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
+        String q_task =     "select a.id, c.id, c.name, a.nombre,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
                             "from assignments a "+
                             "left join submissions s on a.id=s.assignment_id "+
                             "left join courses c on a.context_id=c.id "+
@@ -336,7 +336,7 @@ public class LoginActivity extends Activity {
                             "from pseudonyms "+
                             "where unique_id='"+mUser.getText().toString()+"';";
 
-        String q_plan=      "select cm.id CapID,cm.name, ct.id PlanId,ct.title,cm.context_id,ct.content_id,ct.content_type,ct.url " +
+        String q_plan=      "select cm.id CapID,cm.name, ct.id PlanId,ct.nombre,cm.context_id,ct.content_id,ct.content_type,ct.url " +
                             "from context_modules cm " +
                             "join content_tags ct on cm.id=ct.context_module_id " +
                             "where cm.workflow_state='active' and  " +
