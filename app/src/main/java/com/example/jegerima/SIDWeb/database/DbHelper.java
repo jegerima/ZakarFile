@@ -30,6 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManagerNotes.CREATE_TABLE);
         db.execSQL(DataBaseManagerTask.CREATE_TABLE);
         db.execSQL(DataBaseManagerAnnouncements.CREATE_TABLE);
+        db.execSQL(DataBaseManagerPlanning.CREATE_TABLE);
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jegerima.SIDWeb.database.DataBaseManagerPlanning;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerCourses;
@@ -335,6 +336,17 @@ public class LoginActivity extends Activity {
                             "from pseudonyms "+
                             "where unique_id='"+mUser.getText().toString()+"';";
 
+        String q_plan=      "select cm.id CapID,cm.name, ct.id PlanId,ct.title,cm.context_id,ct.content_id,ct.content_type,ct.url " +
+                            "from context_modules cm " +
+                            "join content_tags ct on cm.id=ct.context_module_id " +
+                            "where cm.workflow_state='active' and  " +
+                            "cm.context_id in (select c.id  " +
+                            "from users u  " +
+                            "join enrollments e on e.user_id=u.id  " +
+                            "join courses c on e.course_id=c.id  " +
+                            "join enrollment_terms er on c.enrollment_term_id=er.id  " +
+                            "where u.id=&PV_USER&);";
+
         try{
             con = new MyConnection();
             if(con.getActive()) {
@@ -346,6 +358,7 @@ public class LoginActivity extends Activity {
 
                 rs.close();
                 rs=null;
+
                 System.out.println(q_anuncios.replace("&PV_USER&", userId + ""));
                 rs = con.consulta(q_curos.replace("&PV_USER&", userId + ""));
                 DataBaseManagerCourses courses;
@@ -368,6 +381,9 @@ public class LoginActivity extends Activity {
                     news.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6),rs.getString(7));
                 }
 
+                rs.close();
+                rs=null;
+
                 rs=con.consulta(q_task.replace("&PV_USER&", userId + ""));
                 DataBaseManagerTask tasks;
                 tasks=new DataBaseManagerTask(this);
@@ -382,6 +398,14 @@ public class LoginActivity extends Activity {
                 }
                 rs.close();
                 rs=null;
+
+                rs=con.consulta(q_plan.replace("&PV_USER&", userId + ""));
+                DataBaseManagerPlanning plan;
+                plan=new DataBaseManagerPlanning(this);
+                while (rs.next()) {
+                    //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
+                    plan.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7),rs.getString(8));
+                }
 
             }
         } catch (Exception e) {
