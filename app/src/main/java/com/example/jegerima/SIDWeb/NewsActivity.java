@@ -1,5 +1,6 @@
 package com.example.jegerima.SIDWeb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -7,18 +8,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.MyConnection;
+import com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsActivity extends ActionBarActivity {
 
@@ -30,7 +37,10 @@ public class NewsActivity extends ActionBarActivity {
     private String Contenido;
     private String Fecha;
     private String nComentarios;
-    private ArrayList<String> listComentarios;
+    private ArrayList<String[]> listComentarios=new ArrayList<>();
+    private AnimatedExpandableListView listView;
+    private ExampleAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +49,24 @@ public class NewsActivity extends ActionBarActivity {
         Intent intent = getIntent();
         this.AnuncioID = intent.getStringExtra("NewsID");
         Toast.makeText(this,this.AnuncioID,Toast.LENGTH_SHORT);
+        //lista de comentarios
+        listView = (AnimatedExpandableListView) findViewById(R.id.listViewComents);
+        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                // We call collapseGroupWithAnimation(int) and
+                // expandGroupWithAnimation(int) to animate group
+                // expansion/collapse.
+                if (listView.isGroupExpanded(groupPosition)) {
+                    listView.collapseGroupWithAnimation(groupPosition);
+                } else {
+                    listView.expandGroupWithAnimation(groupPosition);
+                }
+                return true;
+            }
+
+        });
         initData(this.AnuncioID);
     }
 
@@ -81,7 +108,11 @@ public class NewsActivity extends ActionBarActivity {
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
         ListView comentarios = (ListView) findViewById(R.id.listViewComents);
-        listComentarios = new ArrayList<String>();
+
+
+        listComentarios = new ArrayList<String[]>();
+
+
         contenido.setMovementMethod(LinkMovementMethod.getInstance());
         DataBaseManagerAnnouncements dbNews=null;
         try {
@@ -91,12 +122,13 @@ public class NewsActivity extends ActionBarActivity {
             if (datos.moveToFirst()) {
                 titulo.setText(datos.getString(0));
                 materia.setText(datos.getString(1));
-                contenido.setText(Html.fromHtml(datos.getString(2).replaceAll("href=\"/","href=\"https://www.sidweb.espol.edu.ec/")));
+                contenido.setText(Html.fromHtml(datos.getString(2).replaceAll("href=\"/", "href=\"https://www.sidweb.espol.edu.ec/")));
                 fecha.setText(datos.getString(3));
                 mensajes.setText(datos.getString(4));
             }
-            ConsultaComentarios c=new ConsultaComentarios();
+            ConsultaComentarios c=new ConsultaComentarios(this);
             c.execute();
+
 
 
         }catch (Exception e){
@@ -105,10 +137,13 @@ public class NewsActivity extends ActionBarActivity {
             if(dbNews!=null)
                 dbNews.close();
         }
+
     }
-    public ArrayList<String> consultar_comentarios() {
+    public void consultar_comentarios() {
         MyConnection con = null;
         ResultSet rs = null;
+        listComentarios.clear();
+
         int id_comentario;
         //insertar(String id,String code, String name,String term,String teacher)
         String q_comentarios = "select de.id,de.message,de.user_id,de.created_at " +
@@ -123,8 +158,9 @@ public class NewsActivity extends ActionBarActivity {
                 System.out.println(q_comentarios.replace("$PV_ID$",AnuncioID));
                 rs = con.consulta(q_comentarios.replace("$PV_ID$",AnuncioID));
                 while (rs.next()) {
-                    id_comentario = Integer.parseInt(rs.getString(1));
-                    System.out.println(id_comentario);
+                    //list.add(new String[]{datos.getString(0), datos.getString(1), datos.getString(2), datos.getString(3),datos.getString(4),datos.getString(5)});
+                    //Rs devuelve: id->comentario, mensaje, id->estudiante, fecha de creado
+                    listComentarios.add(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
                 }
 
                 rs.close();
@@ -144,11 +180,17 @@ public class NewsActivity extends ActionBarActivity {
                 //Logger.getLogger(consulta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return null;
+        System.out.println(listComentarios.size());
+        //Llena el activity
+
+
     }
     public class ConsultaComentarios extends AsyncTask<String, Void, String> {
+        Context contexto;
 
-
+        public ConsultaComentarios(Context c){
+            contexto=c;
+        }
         @Override
         protected void onPreExecute() {
 
@@ -156,12 +198,41 @@ public class NewsActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            listComentarios=consultar_comentarios();
+            consultar_comentarios();
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
+            List<GroupItem> items = new ArrayList<GroupItem>();
+            GroupItem item = new GroupItem();
+            if(listComentarios.size()==0) item.title = "No hay comentarios ";
+            else{
+                item.title = "Ver los "+listComentarios.size()+" comentarios";
+
+            }
+            for(int j = 0; j < listComentarios.size(); j++) {
+                ChildItem child = new ChildItem();
+
+                child.title = "Usuario: "+listComentarios.get(j)[0];
+                System.out.println(listComentarios.get(j)[0]);
+                child.hint = listComentarios.get(j)[1];
+                System.out.println(listComentarios.get(j)[1]);
+                item.items.add(child);
+
+            }
+
+            items.add(item);
+            GroupItem item2 = new GroupItem();
+            items.add(item2);
+            adapter = new ExampleAdapter(contexto);
+            adapter.setData(items);
+
+
+            listView.setAdapter(adapter);
+
+            // In order to show animations, we need to use a custom click handler
+            // for our ExpandableListView.
 
         }
 
@@ -169,5 +240,122 @@ public class NewsActivity extends ActionBarActivity {
         protected void onCancelled() {
 
         }
+    }
+
+    //Clases internas para crear lista expandible
+
+    private static class GroupItem {
+        String title;
+        List<ChildItem> items = new ArrayList<ChildItem>();
+    }
+
+    private static class ChildItem {
+        String title;
+        String hint;
+    }
+
+    private static class ChildHolder {
+        TextView title;
+        TextView hint;
+    }
+
+    private static class GroupHolder {
+        TextView title;
+    }
+
+    /**
+     * Adapter for our list of {@link GroupItem}s.
+     */
+    private class ExampleAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
+        private LayoutInflater inflater;
+
+        private List<GroupItem> items;
+
+        public ExampleAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
+
+        public void setData(List<GroupItem> items) {
+            this.items = items;
+        }
+
+        @Override
+        public ChildItem getChild(int groupPosition, int childPosition) {
+            return items.get(groupPosition).items.get(childPosition);
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public View getRealChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            ChildHolder holder;
+            ChildItem item = getChild(groupPosition, childPosition);
+            if (convertView == null) {
+                holder = new ChildHolder();
+                convertView = inflater.inflate(R.layout.list_item, parent, false);
+                holder.title = (TextView) convertView.findViewById(R.id.textTitle);
+                holder.hint = (TextView) convertView.findViewById(R.id.textHint);
+                convertView.setTag(holder);
+            } else {
+                holder = (ChildHolder) convertView.getTag();
+            }
+
+            holder.title.setText(item.title);
+            holder.hint.setText(item.hint);
+
+            return convertView;
+        }
+
+        @Override
+        public int getRealChildrenCount(int groupPosition) {
+            return items.get(groupPosition).items.size();
+        }
+
+        @Override
+        public GroupItem getGroup(int groupPosition) {
+            return items.get(groupPosition);
+        }
+
+        @Override
+        public int getGroupCount() {
+            return items.size();
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            GroupHolder holder;
+            GroupItem item = getGroup(groupPosition);
+            if (convertView == null) {
+                holder = new GroupHolder();
+                convertView = inflater.inflate(R.layout.group_item, parent, false);
+                holder.title = (TextView) convertView.findViewById(R.id.textTitle);
+                convertView.setTag(holder);
+            } else {
+                holder = (GroupHolder) convertView.getTag();
+            }
+
+            holder.title.setText(item.title);
+
+            return convertView;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public boolean isChildSelectable(int arg0, int arg1) {
+            return true;
+        }
+
     }
 }
