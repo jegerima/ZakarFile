@@ -105,6 +105,10 @@ GLAE"
                 </RelativeLayout>
 
             </LinearLayout>
+        <com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView
+            android:id="@+id/listViewComents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
     </ScrollView>

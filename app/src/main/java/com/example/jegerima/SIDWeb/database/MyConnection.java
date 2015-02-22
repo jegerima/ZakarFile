@@ -56,8 +56,8 @@ public class MyConnection {
 
         }catch(Exception e){
             System.out.println("inicio error");
-            System.out.println(e.toString());;
-            e.printStackTrace();
+            System.out.println(e.toString());
+            //e.printStackTrace();
             System.out.println("fin error");
             active=false;
             try {
