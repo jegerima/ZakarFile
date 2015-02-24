@@ -323,7 +323,7 @@ public class LoginActivity extends Activity {
                             "where context_id=16144 and submission_types not like '%quiz%';";
         */
                             //"select a.id, c.id, c.name, a.nombre,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
-        String q_task =     "select a.id, c.id, c.name, a.nombre,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
+        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
                             "from assignments a "+
                             "left join submissions s on a.id=s.assignment_id "+
                             "left join courses c on a.context_id=c.id "+

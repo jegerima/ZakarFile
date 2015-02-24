@@ -37,6 +37,8 @@
                         android:layout_alignParentLeft="true"
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
                         android:gravity="center"
                         android:textSize="15sp"
                         android:textStyle="bold"
