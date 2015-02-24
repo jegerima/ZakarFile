@@ -102,10 +102,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 2:
                 transaction.replace(R.id.container, FragmentTabTareas);
                 break;
-            case 3:
+            //case 3:
                 //fragmentManager.beginTransaction().replace(R.id.container, FragmentTabInicio).commit();
-                break;
-            case 4:
+                //break;
+            case 3:
                 logout();
                 break;
             //Default sera usado para las Materias
@@ -121,7 +121,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         }
         onSectionAttached(position + 1);
         transaction.commit();
-        Toast.makeText(this, mTitle + " " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, mTitle + " " + position, Toast.LENGTH_SHORT).show();
     }
 
     public void onSectionAttached(int number) {

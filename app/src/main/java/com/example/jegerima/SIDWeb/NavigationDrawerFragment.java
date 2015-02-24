@@ -150,11 +150,11 @@ public class NavigationDrawerFragment extends Fragment {
 
         ArrayList<String[]> list=new ArrayList<String[]>();
         list.add(new String[]{"Inicio","0"});
-        list.add(new String[]{"Curso", "1"});
+        list.add(new String[]{"Cursos", "1"});
         addSubjects(list);//se consulta a la base de datos para llenar las materias
         list.add(new String[]{"Tareas","2"});
-        list.add(new String[]{"Horario","3"});
-        list.add(new String[]{"Salir", "4"});
+        //list.add(new String[]{"Horario","3"});
+        list.add(new String[]{"Salir", "3"});
         SWMenuAdapter swm= new SWMenuAdapter(getActivity(),list);
         //SWEffects.animation(mDrawerListView,swm,1,0,0,0);
         mDrawerListView.setAdapter(swm);

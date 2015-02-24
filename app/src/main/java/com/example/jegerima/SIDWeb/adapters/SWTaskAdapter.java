@@ -31,7 +31,7 @@ public class SWTaskAdapter extends SWAdapter{
         final String[] datos=(String[])getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_personal_tasks, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_tasks, parent, false);
         }
 
         //obtengo cada uno de los TextView del view de mis tareas

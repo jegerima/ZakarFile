@@ -26,16 +26,16 @@
         android:paddingBottom="10dp"
         android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"
-        android:background="@color/material_blue_grey_800"
+        android:background="#222222"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/abc_action_bar_default_height_material" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="#EEEEEE"
         android:layout_gravity="center">
 
     <ScrollView
@@ -45,7 +45,7 @@
         <LinearLayout android:id="@+id/user_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="#EEEEEE"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:layout_centerVertical="true"
@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/login_horizontal_margin"
                 android:paddingRight="@dimen/login_horizontal_margin"
+                android:textStyle="bold"
                 android:text="Usuario"/>
 
             <EditText android:id="@+id/user"
@@ -81,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/login_horizontal_margin"
                 android:paddingRight="@dimen/login_horizontal_margin"
+                android:textStyle="bold"
                 android:text="Contraseña"/>
 
             <EditText android:id="@+id/password"

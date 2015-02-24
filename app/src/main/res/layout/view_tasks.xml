@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_marginBottom="5dp"
     android:layout_height="96dp"
-    style="@style/nowCardStyle_Task">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/nowCardStyle_Task"
         android:orientation="vertical">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
