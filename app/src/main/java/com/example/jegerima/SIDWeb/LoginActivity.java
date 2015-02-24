@@ -245,7 +245,6 @@ public class LoginActivity extends Activity {
         protected String doInBackground(String... params) {
             // TODO: attempt authentication against a network service.
             mProgress.setProgress(0);
-            //mProgress.setVisibility(View.VISIBLE);
             log_bool = null;/*
             log_bool = login(params[0], params[1]);*/
             log_bool="true";
@@ -324,7 +323,7 @@ public class LoginActivity extends Activity {
                             "where context_id=16144 and submission_types not like '%quiz%';";
         */
                             //"select a.id, c.id, c.name, a.nombre,a.description,due_at desde ,unlock_at hasta,lock_at atraso "+
-        String q_task =     "select a.id, c.id, c.name, a.title,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
+        String q_task =     "select a.id, c.id, c.name, a.nombre,a.description,COALESCE(due_at,'1901-01-01 11:22:33') desde ,unlock_at hasta,lock_at atraso,max(s.submitted_at),count(a.id) "+
                             "from assignments a "+
                             "left join submissions s on a.id=s.assignment_id "+
                             "left join courses c on a.context_id=c.id "+
@@ -337,7 +336,7 @@ public class LoginActivity extends Activity {
                             "from pseudonyms "+
                             "where unique_id='"+mUser.getText().toString()+"';";
 
-        String q_plan=      "select cm.id CapID,cm.name, ct.id PlanId,ct.title,cm.context_id,ct.content_id,ct.content_type,ct.url " +
+        String q_plan=      "select cm.id CapID,cm.name, ct.id PlanId,ct.title,cm.context_id,ct.content_id,ct.content_type,ct.url,ct.content_id " +
                             "from context_modules cm " +
                             "join content_tags ct on cm.id=ct.context_module_id " +
                             "where cm.workflow_state='active' and  " +
@@ -405,7 +404,7 @@ public class LoginActivity extends Activity {
                 plan=new DataBaseManagerPlanning(this);
                 while (rs.next()) {
                     //insertar(String id,String id_curso,String nombre_curso,String titulo,String contenido,Date fecha,String num_msgs)
-                    plan.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7),rs.getString(8));
+                    plan.insertar(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
                 }
 
             }

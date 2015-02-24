@@ -4,114 +4,134 @@
     android:layout_height="match_parent"
     tools:context="com.example.jegerima.SIDWeb.NewsActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        style="@style/nowCardStyle_Task">
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.30">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                style="@style/nowCardStyle_Task">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#CCFFCC"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <TextView
-                        android:id="@+id/lblTitulo"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="6dp"
+                        android:layout_height="wrap_content"
+                        android:background="#CCFFCC"
+                        android:orientation="horizontal">
+
+                        <TextView
+                                android:id="@+id/lblTitulo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentLeft="true"
+                                android:gravity="center"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:text="Asistencia Jueves 29 de Enero"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/lblMateria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:gravity="center"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="Asistencia Jueves 29 de Enero"/>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/lblMateria"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:paddingBottom="7dp"
-                android:paddingTop="2dp"
-                android:textStyle="bold|italic"
-                android:gravity="right"
-                android:text="Presencia Mental"/>
-
-
-
-            <TextView
-                android:id="@+id/lblContenido"
-                android:paddingRight="5dp"
-                android:paddingLeft="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Estimados Estudiantes
-Para los que no tienen claro, los dias martes 20 y jueves 22, serán las ESPOSICIONES DE LOS CHAKRA
-Las indicaciones están en la tarea abierta en SIDWeb desde la semana anterior
-
-Saludos
-GLAE"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.70"
-                    android:padding="0dp">
-
-                    <TextView
-                        android:id="@+id/lblFecha"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
                         android:paddingLeft="2dp"
-                        android:textColor="#888888"
-                        android:text="Ene 25 en 3:51 PM"/>
+                        android:paddingRight="2dp"
+                        android:paddingBottom="7dp"
+                        android:paddingTop="2dp"
+                        android:textStyle="bold|italic"
+                        android:gravity="right"
+                        android:text="Presencia Mental"/>
 
-                </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.30">
 
                     <TextView
-                        android:id="@+id/lblNMensajes"
+                        android:id="@+id/lblContenido"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textColor="#888888"
-                        android:text="0 mensajes"/>
+                        android:text="Estimados Estudiantes
+        Para los que no tienen claro, los dias martes 20 y jueves 22, serán las ESPOSICIONES DE LOS CHAKRA
+        Las indicaciones están en la tarea abierta en SIDWeb desde la semana anterior
 
-                </RelativeLayout>
+        Saludos
+        GLAE"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.70"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/lblFecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left"
+                                android:paddingLeft="2dp"
+                                android:textColor="#888888"
+                                android:text="Ene 25 en 3:51 PM"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.30">
+
+                            <TextView
+                                android:id="@+id/lblNMensajes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:textColor="#888888"
+                                android:text="0 mensajes"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
             </LinearLayout>
-        <com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView
-            android:id="@+id/listViewComents"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" />
+            </ScrollView>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.45">
+
+            <com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView
+                android:id="@+id/listViewComents"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                style="@style/nowCardStyle_Task"/>
+        </RelativeLayout>
     </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>
