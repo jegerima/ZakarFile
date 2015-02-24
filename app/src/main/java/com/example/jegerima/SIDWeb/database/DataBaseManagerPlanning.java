@@ -19,6 +19,7 @@ public class DataBaseManagerPlanning {
     public static final  String PLAN_ID = "plan_id";
     public static final  String PLAN_TITLE = "plan_title";
     public static final  String CONTENT_ID = "content_id";
+    public static final  String ATTACH_ID = "attach";
     public static final  String CONTENT_TYPE = "content_type";
     public static final  String URL = "url";
 
@@ -37,6 +38,7 @@ public class DataBaseManagerPlanning {
             + ID_COURSE +" integer not null,"
             + CONTENT_ID +" text not null,"
             + CONTENT_TYPE +" text not null,"
+            + ATTACH_ID +" text,"
             + URL +" text,"
             + " FOREIGN KEY("+ID_COURSE+") REFERENCES "+TABLE_FK+"("+FK_ID+"));";
 
@@ -44,7 +46,7 @@ public class DataBaseManagerPlanning {
         helper = new DbHelper(contexto);
         db = helper.getWritableDatabase();
     }
-    public ContentValues generarContentValues(String cap_id,String cap_name,String plan_id,String plan_name,String id_course,String content_id,String content_type,String url){
+    public ContentValues generarContentValues(String cap_id,String cap_name,String plan_id,String plan_name,String id_course,String content_id,String content_type,String url,String attach){
         ContentValues valores = new ContentValues();
         valores.put(CAP_ID,cap_id);
         valores.put(CAP_NAME,cap_name);
@@ -54,12 +56,13 @@ public class DataBaseManagerPlanning {
         valores.put(CONTENT_ID,content_id);
         valores.put(CONTENT_TYPE,content_type);
         valores.put(URL,url);
+        valores.put(ATTACH_ID,attach);
 
         return valores;
     }
-    public void insertar(String cap_id,String cap_name,String plan_id,String plan_name,String id_course,String content_id,String content_type,String url){
+    public void insertar(String cap_id,String cap_name,String plan_id,String plan_name,String id_course,String content_id,String content_type,String url,String attach){
         //insert  into contactos
-        db.insert(TABLE_NAME,null,generarContentValues(cap_id,cap_name,plan_id,plan_name,id_course,content_id,content_type,url));
+        db.insert(TABLE_NAME,null,generarContentValues(cap_id,cap_name,plan_id,plan_name,id_course,content_id,content_type,url,attach));
     }
 
     public Cursor consultar_grupos(String id){
@@ -75,7 +78,7 @@ public class DataBaseManagerPlanning {
     public Cursor consultar_items(String id,String grupo){
         //insert  into contactos
 
-        String[] campos = new String[] {PLAN_ID, PLAN_TITLE,ID_COURSE,CONTENT_ID,CONTENT_TYPE,URL};
+        String[] campos = new String[] {PLAN_ID, PLAN_TITLE,ID_COURSE,CONTENT_ID,CONTENT_TYPE,URL,ATTACH_ID};
         String[] args = new String[] {id,grupo};
         //Cursor c = db.query(TABLE_NAME, campos, "usuario=?(where)", args(para el where), group by, having, order by, num);
         return db.query(TABLE_NAME, campos, ID_COURSE+"=? and "+CAP_ID+"=? ", args, null, null, null);
