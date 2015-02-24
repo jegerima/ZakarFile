@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,10 +100,10 @@ public class LoginActivity extends Activity {
                     mAuthTask.cancel(true);
                     mButton.setText(getString(R.string.action_cancel2));
                     mButton.setEnabled(false);
-
                 } else {
 
                     if(comprobar_campos())return;
+
                     String user = mUser.getText().toString();
                     String pass = mPassword.getText().toString();
 

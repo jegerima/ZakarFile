@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingRight="10dp"
-    android:paddingLeft="50dp">
+    android:paddingLeft="40dp">
 
     <TextView
         android:id="@+id/textTitle"
