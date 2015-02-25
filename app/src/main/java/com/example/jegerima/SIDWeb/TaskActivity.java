@@ -1,9 +1,11 @@
 package com.example.jegerima.SIDWeb;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -123,6 +125,14 @@ public class TaskActivity extends ActionBarActivity {
                 showDialog("Ingrese URL");
             }
         });
+
+        btn = (Button)findViewById(R.id.sbm_gdrive);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilePickerUp();
+            }
+        });
     }
 
     public void showDialog(String msg)
@@ -130,5 +140,34 @@ public class TaskActivity extends ActionBarActivity {
         FragmentManager fm = getSupportFragmentManager();
         TextFragmentDialog tfd = new TextFragmentDialog(4,msg);
         tfd.show(fm,"TAG");
+    }
+
+    public void FilePickerUp()
+    {
+        int request_code = 50;
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, request_code);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+
+        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
+        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
+        // response to some other intent, and the code below shouldn't run at all.
+
+        if (requestCode == 50 && resultCode == Activity.RESULT_OK) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+            Uri uri = null;
+            if (resultData != null) {
+                uri = resultData.getData();
+                Toast.makeText(this,uri.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(uri.toString());
+            }
+        }
     }
 }
