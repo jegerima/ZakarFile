@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jegerima.SIDWeb.adapters.SWEffects;
@@ -87,6 +88,7 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
                             else
                                 child.url = datos_items.getString(5);
                             child.id = datos_items.getString(0);
+                            child.iconId = getIdIconType(plan_type.get(datos_items.getString(4)));
                             uno.items.add(child);
 
                         }while (datos_items.moveToNext());
@@ -140,6 +142,28 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
         return V;
     }
 
+    private int getIdIconType(String type)
+    {
+        int id = R.drawable.ic_icon_cmsh;
+        if(type.equalsIgnoreCase("Adjunto"))
+        {
+            return R.drawable.ic_icon_attachment;
+        }
+        if(type.equalsIgnoreCase("Página de Wiki"))
+        {
+            return R.drawable.ic_icon_wiki;
+        }
+        if(type.equalsIgnoreCase("Link Externo"))
+        {
+            return R.drawable.ic_icon_link;
+        }
+        if(type.equalsIgnoreCase("Calificacion"))
+        {
+            return R.drawable.ic_icon_assignment;
+        }
+        return id;
+    }
+
 
     private static class GroupItem {
         String title;
@@ -151,6 +175,7 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
         String hint;
         String url;
         String id;
+        int iconId;
     }
 
     private static class ChildHolder {
@@ -158,6 +183,7 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
         TextView hint;
         TextView url;
         TextView id;
+        ImageView icon;
     }
 
     private static class GroupHolder {
@@ -201,6 +227,7 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
                 holder.hint = (TextView) convertView.findViewById(R.id.textHint);
                 holder.url = (TextView) convertView.findViewById(R.id.hideTextUrl);
                 holder.id = (TextView) convertView.findViewById(R.id.hideTextId);
+                holder.icon = (ImageView) convertView.findViewById(R.id.item_icon);
                 convertView.setTag(holder);
             } else {
                 holder = (ChildHolder) convertView.getTag();
@@ -210,6 +237,7 @@ public class PlanningFragment extends android.support.v4.app.Fragment {
             holder.hint.setText(item.hint);
             holder.url.setText(item.url);
             holder.id.setText(item.id);
+            holder.icon.setImageResource(item.iconId);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
