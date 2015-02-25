@@ -213,12 +213,12 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/sbm_file"
-                android:text="Archivo"/>
+                android:text="Foto"/>
             <Button
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/sbm_gdrive"
-                android:text="Google Drive"/>
+                android:text="Google Drive/Archivos"/>
 
         </LinearLayout>
 
