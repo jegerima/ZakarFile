@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -22,6 +24,9 @@ import android.widget.Toast;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
 import com.example.jegerima.SIDWeb.fragmentsDialog.TextFragmentDialog;
 
+import java.io.File;
+import java.util.Calendar;
+
 
 public class TaskActivity extends ActionBarActivity {
 
@@ -36,6 +41,7 @@ public class TaskActivity extends ActionBarActivity {
     private String FechaTope;
     private String Estado;
     private String nComentarios;
+    private Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +139,14 @@ public class TaskActivity extends ActionBarActivity {
                 FilePickerUp();
             }
         });
+
+        btn = (Button)findViewById(R.id.sbm_file);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PhotoPickerUp();
+            }
+        });
     }
 
     public void showDialog(String msg)
@@ -147,7 +161,24 @@ public class TaskActivity extends ActionBarActivity {
         int request_code = 50;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
         startActivityForResult(intent, request_code);
+    }
+
+    public void PhotoPickerUp()
+    {
+        File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/SidWeb/Camara");
+        directory.mkdirs();
+
+        int IMAGE_CAPTURE = 102;
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //Se guarda la fecha para ponerla de nombre en la imagen
+        String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        //se defina guardar en la carpeta destinada con la fecha de nombre
+        File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/SidWeb/Camara/" + mydate + ".jpg");
+        fileUri = Uri.fromFile(mediaFile);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(intent, IMAGE_CAPTURE);
     }
 
     @Override
@@ -169,5 +200,38 @@ public class TaskActivity extends ActionBarActivity {
                 System.out.println(uri.toString());
             }
         }
+
+        if (requestCode == 102) {
+            if(resultCode == Activity.RESULT_OK) {
+                Toast.makeText(this, "Imagen adjuntada", Toast.LENGTH_SHORT).show();
+                System.out.println("Imagen Tomada: "+fileUri);
+            }
+            else
+            {
+                System.out.println("Cancelado");
+                Toast.makeText(this,"Cancelado", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
+    /*
+    void setEntregado()
+    {
+        DataBaseManagerTask dbNews=null;
+        try
+        {
+            System.out.println("Extrayendo tarea...");
+            dbNews = new DataBaseManagerTask(this);
+            Cursor dato = dbNews.consultar_tarea(TareaID);
+            if (dato.moveToFirst()) {
+
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }finally {
+            if(dbNews!=null)
+                dbNews.close();
+        }
+    }
+    */
 }
