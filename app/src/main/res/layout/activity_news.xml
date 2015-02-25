@@ -4,25 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.example.jegerima.SIDWeb.NewsActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.30">
+            android:layout_height="wrap_content">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:fillViewport="true"
                 style="@style/nowCardStyle_Task">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                     <LinearLayout
@@ -123,19 +126,18 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.45">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                style="@style/nowCardStyle_Task"
+                android:layout_height="wrap_content"
                 android:visibility="visible">
 
                 <com.example.jegerima.SIDWeb.widget.AnimatedGifImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="100dp"
+                    android:layout_gravity="center"
+                    android:layout_height="100dp"
                     android:id="@+id/cargando"/>
 
                 <com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView
@@ -146,5 +148,7 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

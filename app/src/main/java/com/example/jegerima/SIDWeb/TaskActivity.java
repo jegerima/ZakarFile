@@ -1,17 +1,24 @@
 package com.example.jegerima.SIDWeb;
 
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jegerima.SIDWeb.database.DataBaseManagerTask;
+import com.example.jegerima.SIDWeb.fragmentsDialog.TextFragmentDialog;
 
 
 public class TaskActivity extends ActionBarActivity {
@@ -101,6 +108,27 @@ public class TaskActivity extends ActionBarActivity {
                 dbNews.close();
         }
 
+        Button btn = (Button)findViewById(R.id.sbm_text);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog("Ingrese el texto");
+            }
+        });
 
+        btn = (Button)findViewById(R.id.sbm_url);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog("Ingrese URL");
+            }
+        });
+    }
+
+    public void showDialog(String msg)
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        TextFragmentDialog tfd = new TextFragmentDialog(4,msg);
+        tfd.show(fm,"TAG");
     }
 }
