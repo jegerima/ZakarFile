@@ -128,7 +128,7 @@ public class NewsActivity extends ActionBarActivity {
                 materia.setText(datos.getString(1));
                 contenido.setText(Html.fromHtml(datos.getString(2).replaceAll("href=\"/", "href=\"https://www.sidweb.espol.edu.ec/")));
                 fecha.setText(datos.getString(3));
-                mensajes.setText(datos.getString(4));
+                mensajes.setText("");//datos.getString(4));
             }
             ConsultaComentarios c=new ConsultaComentarios(this);
             c.execute();
@@ -227,8 +227,9 @@ public class NewsActivity extends ActionBarActivity {
             }
 
             items.add(item);
-            //GroupItem item2 = new GroupItem();
+            GroupItem item2 = new GroupItem();
             //items.add(item2);
+
 
             cargando.setVisibility(View.GONE);
             adapter = new ExampleAdapter(contexto);
@@ -349,12 +350,13 @@ public class NewsActivity extends ActionBarActivity {
                 convertView = inflater.inflate(R.layout.comments_group_item, parent, false);
                 holder.title = (TextView) convertView.findViewById(R.id.textTitle);
                 convertView.setTag(holder);
+
             } else {
                 holder = (GroupHolder) convertView.getTag();
             }
 
             holder.title.setText(item.title);
-
+            if(item.title==null) convertView.setVisibility(View.INVISIBLE);
             return convertView;
         }
 

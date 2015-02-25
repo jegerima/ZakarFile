@@ -103,7 +103,7 @@ public class TaskActivity extends ActionBarActivity {
                 //TITLE, COURSE_NAME,DESCRIPTION,STAR_DATE,FINAL_DATE,DEAD_LINE
                 titulo.setText(dato.getString(0));
                 materia.setText(dato.getString(1));
-                contenido.setText(Html.fromHtml(dato.getString(2)));
+                contenido.setText(Html.fromHtml(dato.getString(2).replaceAll("href=\"/", "href=\"https://www.sidweb.espol.edu.ec/")));
                 fecha.setText(dato.getString(3));
                 puntaje.setText("10 de 10 puntos");
                 System.out.println("Done");

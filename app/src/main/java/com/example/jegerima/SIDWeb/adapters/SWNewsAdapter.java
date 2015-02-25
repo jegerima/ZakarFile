@@ -3,6 +3,8 @@ package com.example.jegerima.SIDWeb.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +48,14 @@ public class SWNewsAdapter extends SWAdapter {
         //voy seteando el contenido de cada uno
         titulo.setText(datos[0]);
         materia.setText(datos[1]);
-        contenido.setText(Html.fromHtml(datos[2]));
+        contenido.setText(Html.fromHtml(datos[2]).toString());
         fecha.setText(datos[3]);
-        mensajes.setText(datos[4]);
+        mensajes.setText("");//datos[4]);
         final String id=datos[5];
         final String title=datos[0];
         // Return the completed view to render on screen
+
+
 
         convertView.findViewById(R.id.frmNews).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +66,7 @@ public class SWNewsAdapter extends SWAdapter {
                 getContext().startActivity(intent);
             }
         });
+
 
         return convertView;
     }
