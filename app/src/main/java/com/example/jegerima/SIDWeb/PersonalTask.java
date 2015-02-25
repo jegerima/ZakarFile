@@ -168,13 +168,17 @@ public class PersonalTask extends ActionBarActivity implements DatePickerDialog.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.guardar_apunte) {
-            guardar();
-            return true;
-        }
-        if (id == R.id.cancelar_apunte) {
-            cancelar();
-            return true;
+
+        switch(item.getItemId()){
+            case R.id.guardar_apunte:
+                guardar();
+                return true;
+            case R.id.cancelar_apunte:
+                cancelar();
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
