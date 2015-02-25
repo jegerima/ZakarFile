@@ -315,8 +315,10 @@ public class NewsActivity extends ActionBarActivity {
             }
 
             holder.nombre.setText(item.nombre);
-            holder.mensaje.setText(Html.fromHtml(item.mensaje));
+            holder.mensaje.setText(Html.fromHtml(item.mensaje.replaceAll("href=\"/", "href=\"https://www.sidweb.espol.edu.ec/")));
             holder.publicaion.setText(item.publicacion);
+
+            holder.mensaje.setMovementMethod(LinkMovementMethod.getInstance());
 
             return convertView;
         }
