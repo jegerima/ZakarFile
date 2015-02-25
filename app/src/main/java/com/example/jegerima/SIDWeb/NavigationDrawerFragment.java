@@ -131,7 +131,7 @@ public class NavigationDrawerFragment extends Fragment {
                     //al seleccionar una opcion que no sea cursos o alguna materia se manda señal para ocultar la vista de las materias
                     if(position>1 && position<2+n_materias){
                         SWMenuAdapter.OPEN=View.VISIBLE;
-                        name=((TextView)mDrawerListView.getChildAt(position).findViewById(R.id.title)).getText().toString();
+                        name=((TextView)mDrawerListView.getChildAt(position).findViewById(R.id.title)).getText().toString().substring(1);
 
                     }
                     else

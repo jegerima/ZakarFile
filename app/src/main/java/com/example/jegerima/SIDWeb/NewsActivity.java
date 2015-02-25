@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.jegerima.SIDWeb.database.DataBaseManagerAnnouncements;
 import com.example.jegerima.SIDWeb.database.MyConnection;
 import com.example.jegerima.SIDWeb.widget.AnimatedExpandableListView;
+import com.example.jegerima.SIDWeb.widget.AnimatedGifImageView;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +42,7 @@ public class NewsActivity extends ActionBarActivity {
     private ArrayList<String[]> listComentarios=new ArrayList<>();
     private AnimatedExpandableListView listView;
     private ExampleAdapter adapter;
+    private AnimatedGifImageView cargando;
 
 
     @Override
@@ -108,7 +111,8 @@ public class NewsActivity extends ActionBarActivity {
         TextView fecha = (TextView) findViewById(R.id.lblFecha);
         TextView mensajes = (TextView) findViewById(R.id.lblNMensajes);
         ListView comentarios = (ListView) findViewById(R.id.listViewComents);
-
+        cargando = (AnimatedGifImageView) findViewById(R.id.cargando);
+        cargando.setAnimatedGif(R.drawable.cargando,AnimatedGifImageView.TYPE.FIT_CENTER);
 
         listComentarios = new ArrayList<String[]>();
 
@@ -206,6 +210,7 @@ public class NewsActivity extends ActionBarActivity {
         protected void onPostExecute(String result) {
             List<GroupItem> items = new ArrayList<GroupItem>();
             GroupItem item = new GroupItem();
+
             if(listComentarios.size()==0) item.title = "No hay comentarios ";
             else{
                 item.title = "Ver ("+listComentarios.size()+") comentario(s)";
@@ -222,9 +227,12 @@ public class NewsActivity extends ActionBarActivity {
             }
 
             items.add(item);
-            GroupItem item2 = new GroupItem();
-            items.add(item2);
+            //GroupItem item2 = new GroupItem();
+            //items.add(item2);
+
+            cargando.setVisibility(View.GONE);
             adapter = new ExampleAdapter(contexto);
+
             adapter.setData(items);
 
 
@@ -306,7 +314,7 @@ public class NewsActivity extends ActionBarActivity {
             }
 
             holder.nombre.setText(item.nombre);
-            holder.mensaje.setText(item.mensaje);
+            holder.mensaje.setText(Html.fromHtml(item.mensaje));
             holder.publicaion.setText(item.publicacion);
 
             return convertView;
