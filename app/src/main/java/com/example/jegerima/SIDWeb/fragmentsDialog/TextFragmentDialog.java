@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,23 +75,28 @@ public class TextFragmentDialog extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
 
         final View v = inflater.inflate(R.layout.text_input_fragmen_dialog, null);
-        TextView tv = (TextView)v.findViewById(R.id.lbl_msg);
+        final TextView tv = (TextView)v.findViewById(R.id.lbl_msg);
+        final EditText et = (EditText)v.findViewById((R.id.txt_content));
         tv.setText(this.msg);
-        tv.setTextIsSelectable(true);
+
+        if(this.msg.contains("URL"))
+            ((EditText)v.findViewById(R.id.txt_content)).setInputType(InputType.TYPE_CLASS_TEXT);
+        et.setTextIsSelectable(true);
+        et.setSelected(true);
 
         builder.setView(v)
                 // Add action buttons
                 .setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        String str = ((EditText)v.findViewById(R.id.txt_content)).getText().toString();
+                        String str = et.getText().toString();
                         System.out.println(str);
                         msg = str;
                     }
                 })
                 .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        String str = ((EditText)v.findViewById(R.id.txt_content)).getText().toString();
+                        String str = et.getText().toString();
                         System.out.println(str);
                         msg = str;
                     }
